@@ -1,0 +1,14 @@
+﻿namespace VehicleCRM.Domain.Entities.Base
+{
+    public abstract class BaseEntity
+    {
+        public virtual long Id { get; protected set; }
+        public virtual Guid PublicId { get; protected set; } = Guid.NewGuid();
+        public virtual DateTime CreateDate { get; protected set; }
+        public virtual DateTime? ModificationDate { get; protected set; }
+        public virtual bool IsDeleted { get; protected set; }
+        public virtual int CreateUserId { get; protected set; }
+        public virtual int? ModificationUserId { get; protected set; }
+        public virtual int? DeleteUserId { get; protected set; }
+    }
+}
