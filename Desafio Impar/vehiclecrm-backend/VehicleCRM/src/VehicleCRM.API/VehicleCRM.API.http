@@ -1,0 +1,6 @@
+# @VehicleCRM.API_HostAddress = http://localhost:5106
+
+# GET {{VehicleCRM.API_HostAddress}}/weatherforecast/
+# Accept: application/json
+
+# ###
