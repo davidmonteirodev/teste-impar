@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/.vs
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.API/bin/Debug/net10.0
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.API/obj
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.Application/bin/Debug/net10.0
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.Application/obj
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.Domain/bin/Debug/net10.0
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.Domain/obj
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.Infrastructure/bin/Debug/net10.0
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.Infrastructure/obj
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/tests/VehicleCRM.Test/bin/Debug/net10.0
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/tests/VehicleCRM.Test/obj
