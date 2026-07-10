@@ -18,7 +18,7 @@ namespace VehicleCRM.Application.Features.Customers.Commands
         {
             var customer = new Customer(request.Name, request.Email, request.Phone, request.MainInterest);
 
-            //await _customerRepository.InsertAsync(customer, cancellationToken);
+           await _customerRepository.InsertAsync(customer, cancellationToken);
 
             return new EntityCreatedResponse(customer.Id, customer.CreateDate);
         }
