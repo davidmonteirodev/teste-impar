@@ -3,8 +3,6 @@ using VehicleCRM.Domain.Interfaces.Repositories;
 
 namespace VehicleCRM.Application.Features.SaleOpportunities.Queries
 {
-    public sealed record GetSaleOpportunityByIdQuery(long Id) : IRequest<SaleOpportunityResponse>;
-
     public sealed class GetSaleOpportunityByIdQueryHandler : IRequestHandler<GetSaleOpportunityByIdQuery, SaleOpportunityResponse>
     {
         private readonly ISaleOpportunityRepository _saleOpportunityRepository;

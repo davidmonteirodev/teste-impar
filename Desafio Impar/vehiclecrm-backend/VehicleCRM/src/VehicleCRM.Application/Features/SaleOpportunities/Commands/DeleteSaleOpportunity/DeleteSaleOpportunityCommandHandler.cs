@@ -3,8 +3,6 @@ using VehicleCRM.Domain.Interfaces.Repositories;
 
 namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
 {
-    public sealed record DeleteSaleOpportunityCommand(long Id) : IRequest;
-
     public sealed class DeleteSaleOpportunityCommandHandler : IRequestHandler<DeleteSaleOpportunityCommand>
     {
         private readonly ISaleOpportunityRepository _saleOpportunityRepository;

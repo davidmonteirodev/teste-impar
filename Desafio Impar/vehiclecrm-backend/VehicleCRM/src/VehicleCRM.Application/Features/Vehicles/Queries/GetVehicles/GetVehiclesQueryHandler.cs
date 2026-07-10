@@ -3,8 +3,6 @@ using VehicleCRM.Domain.Interfaces.Repositories;
 
 namespace VehicleCRM.Application.Features.Vehicles.Queries
 {
-    public sealed record GetVehiclesQuery : IRequest<IReadOnlyCollection<VehicleResponse>>;
-
     public sealed class GetVehiclesQueryHandler : IRequestHandler<GetVehiclesQuery, IReadOnlyCollection<VehicleResponse>>
     {
         private readonly IVehicleRepository _vehicleRepository;

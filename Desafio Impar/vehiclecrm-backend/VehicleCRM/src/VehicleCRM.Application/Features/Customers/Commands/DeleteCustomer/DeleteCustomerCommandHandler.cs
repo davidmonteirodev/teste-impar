@@ -3,8 +3,6 @@ using VehicleCRM.Domain.Interfaces.Repositories;
 
 namespace VehicleCRM.Application.Features.Customers.Commands
 {
-    public sealed record DeleteCustomerCommand(long Id) : IRequest;
-
     public sealed class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand>
     {
         private readonly ICustomerRepository _customerRepository;

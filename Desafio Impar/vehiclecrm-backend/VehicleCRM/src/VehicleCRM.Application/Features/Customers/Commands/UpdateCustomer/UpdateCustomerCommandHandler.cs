@@ -1,16 +1,8 @@
 using MediatR;
-using VehicleCRM.Domain.Enums;
 using VehicleCRM.Domain.Interfaces.Repositories;
 
 namespace VehicleCRM.Application.Features.Customers.Commands
 {
-    public sealed record UpdateCustomerCommand(
-        long Id,
-        string Name,
-        string Email,
-        string Phone,
-        CustomerMainInterest MainInterest) : IRequest;
-
     public sealed class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand>
     {
         private readonly ICustomerRepository _customerRepository;

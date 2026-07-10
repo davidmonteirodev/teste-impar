@@ -3,8 +3,6 @@ using VehicleCRM.Domain.Interfaces.Repositories;
 
 namespace VehicleCRM.Application.Features.Customers.Queries
 {
-    public sealed record GetCustomerByIdQuery(long Id) : IRequest<CustomerResponse>;
-
     public sealed class GetCustomerByIdQueryHandler : IRequestHandler<GetCustomerByIdQuery, CustomerResponse>
     {
         private readonly ICustomerRepository _customerRepository;
