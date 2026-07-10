@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using VehicleCRM.Application;
+using VehicleCRM.Infrastructure;
 using VehicleCRM.Infrastructure.Persistence.Contexts;
 using VehicleCRM.Infrastructure.Persistence.Extensions;
 
@@ -8,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<VehicleCrmDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("VehicleCrmConnection")));
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

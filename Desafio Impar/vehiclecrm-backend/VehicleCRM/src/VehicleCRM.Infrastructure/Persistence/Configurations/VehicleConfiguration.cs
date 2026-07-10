@@ -12,9 +12,6 @@ namespace VehicleCRM.Infrastructure.Persistence.Configurations
 
             builder.HasKey(v => v.Id);
 
-            builder.Property(v => v.PublicId)
-                .IsRequired();
-
             builder.Property(v => v.CreateDate)
                 .IsRequired();
 

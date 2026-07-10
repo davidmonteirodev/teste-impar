@@ -32,9 +32,9 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories.Base
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public virtual async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+        public virtual async Task DeleteAsync(long id, CancellationToken cancellationToken = default)
         {
-            var entity = await _context.Set<T>().FirstOrDefaultAsync(e => e.PublicId == id, cancellationToken);
+            var entity = await _context.Set<T>().FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 
             if (entity == null)
                 throw new KeyNotFoundException($"Entity with id {id} not found");
@@ -50,11 +50,11 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories.Base
                 .ToListAsync(cancellationToken);
         }
 
-        public virtual async Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        public virtual async Task<T> GetByIdAsync(long id, CancellationToken cancellationToken = default)
         {
             var entity = await _context.Set<T>()
                 .AsNoTracking()
-                .FirstOrDefaultAsync(e => e.PublicId == id, cancellationToken);
+                .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 
             if (entity == null)
                 throw new KeyNotFoundException($"Entity with id {id} not found");

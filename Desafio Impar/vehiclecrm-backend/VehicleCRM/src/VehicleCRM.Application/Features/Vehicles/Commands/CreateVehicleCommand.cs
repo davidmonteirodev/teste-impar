@@ -1,0 +1,43 @@
+using MediatR;
+using VehicleCRM.Application.Common.Models;
+using VehicleCRM.Domain.Entities;
+using VehicleCRM.Domain.Enums;
+using VehicleCRM.Domain.Interfaces.Repositories;
+
+namespace VehicleCRM.Application.Features.Vehicles.Commands
+{
+    public sealed record CreateVehicleCommand(
+        string Brand,
+        string Model,
+        int Year,
+        decimal Price,
+        string Color,
+        int Mileage,
+        VehicleSaleStatus Status) : IRequest<EntityCreatedResponse>;
+
+    public sealed class CreateVehicleCommandHandler : IRequestHandler<CreateVehicleCommand, EntityCreatedResponse>
+    {
+        private readonly IVehicleRepository _vehicleRepository;
+
+        public CreateVehicleCommandHandler(IVehicleRepository vehicleRepository)
+        {
+            _vehicleRepository = vehicleRepository;
+        }
+
+        public async Task<EntityCreatedResponse> Handle(CreateVehicleCommand request, CancellationToken cancellationToken)
+        {
+            var vehicle = new Vehicle(
+                request.Brand,
+                request.Model,
+                request.Year,
+                request.Price,
+                request.Color,
+                request.Mileage,
+                request.Status);
+
+            await _vehicleRepository.InsertAsync(vehicle, cancellationToken);
+
+            return new EntityCreatedResponse(vehicle.Id, vehicle.CreateDate);
+        }
+    }
+}

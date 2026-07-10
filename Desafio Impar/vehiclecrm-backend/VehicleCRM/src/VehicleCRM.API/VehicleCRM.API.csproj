@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VehicleCRM.Application\VehicleCRM.Application.csproj" />
     <ProjectReference Include="..\VehicleCRM.Infrastructure\VehicleCRM.Infrastructure.csproj" />
   </ItemGroup>
 

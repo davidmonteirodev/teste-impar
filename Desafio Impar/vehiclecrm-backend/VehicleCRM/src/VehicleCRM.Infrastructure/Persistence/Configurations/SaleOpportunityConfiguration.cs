@@ -12,9 +12,6 @@ namespace VehicleCRM.Infrastructure.Persistence.Configurations
 
             builder.HasKey(so => so.Id);
 
-            builder.Property(so => so.PublicId)
-                .IsRequired();
-
             builder.Property(so => so.CreateDate)
                 .IsRequired();
 
@@ -39,7 +36,7 @@ namespace VehicleCRM.Infrastructure.Persistence.Configurations
                 .HasColumnType("decimal(18,2)")
                 .IsRequired();
 
-            builder.Property(so => so.NegotiationNotes)
+            builder.Property(so => so.Notes)
                 .HasMaxLength(2000)
                 .IsRequired();
 
