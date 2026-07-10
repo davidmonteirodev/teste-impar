@@ -7,7 +7,8 @@ namespace VehicleCRM.Application.Features.Vehicles.Commands
         public DeleteVehicleCommandValidator()
         {
             RuleFor(x => x.Id)
-                .GreaterThan(0);
+                .GreaterThan(0)
+                .WithMessage("Id inválido.");
         }
     }
 }
