@@ -23,14 +23,8 @@ namespace VehicleCRM.Infrastructure.Persistence.Configurations
             builder.Property(v => v.IsDeleted)
                 .IsRequired();
 
-            builder.Property(v => v.CreateUserId)
-                .IsRequired();
-
-            builder.Property(v => v.ModificationUserId);
-
-            builder.Property(v => v.DeleteUserId);
-
-            builder.Property(v => v.BrandId)
+            builder.Property(v => v.Brand)
+                .HasMaxLength(150)
                 .IsRequired();
 
             builder.Property(v => v.Model)
@@ -54,11 +48,6 @@ namespace VehicleCRM.Infrastructure.Persistence.Configurations
             builder.Property(v => v.Status)
                 .HasConversion<int>()
                 .IsRequired();
-
-            builder.HasOne(v => v.Brand)
-                .WithMany()
-                .HasForeignKey(v => v.BrandId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -9,7 +9,6 @@ namespace VehicleCRM.Infrastructure.Persistence.Contexts
             : base(options) { }
 
         public DbSet<Vehicle> Vehicles => Set<Vehicle>();
-        public DbSet<Brand> Brands => Set<Brand>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

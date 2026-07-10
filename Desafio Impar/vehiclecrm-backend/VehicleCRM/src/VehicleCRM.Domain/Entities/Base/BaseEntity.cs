@@ -7,8 +7,5 @@
         public virtual DateTime CreateDate { get; protected set; }
         public virtual DateTime? ModificationDate { get; protected set; }
         public virtual bool IsDeleted { get; protected set; }
-        public virtual int CreateUserId { get; protected set; }
-        public virtual int? ModificationUserId { get; protected set; }
-        public virtual int? DeleteUserId { get; protected set; }
     }
 }
