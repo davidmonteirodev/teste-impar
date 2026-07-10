@@ -7,7 +7,7 @@ namespace VehicleCRM.Domain.Entities
     {
         protected Vehicle() { }
 
-        public Vehicle(int brandId, string model, int year, decimal price, string color, int mileage, VehicleSaleStatus status)
+        public Vehicle(long brandId, string model, int year, decimal price, string color, int mileage, VehicleSaleStatus status)
         {
             BrandId = brandId;
             Model = model;
@@ -18,7 +18,7 @@ namespace VehicleCRM.Domain.Entities
             Status = status;
         }
 
-        public virtual int BrandId { get; private set; }
+        public virtual long BrandId { get; private set; }
         public virtual string Model { get; private set; }
         public virtual int Year { get; private set; }
         public virtual decimal Price { get; private set; }
