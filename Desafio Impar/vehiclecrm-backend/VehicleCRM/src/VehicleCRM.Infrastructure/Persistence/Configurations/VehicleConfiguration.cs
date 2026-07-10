@@ -20,6 +20,8 @@ namespace VehicleCRM.Infrastructure.Persistence.Configurations
 
             builder.Property(v => v.ModificationDate);
 
+            builder.Property(v => v.DeleteDate);
+
             builder.Property(v => v.IsDeleted)
                 .IsRequired();
 
