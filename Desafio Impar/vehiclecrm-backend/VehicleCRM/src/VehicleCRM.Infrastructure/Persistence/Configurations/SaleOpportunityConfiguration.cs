@@ -37,8 +37,7 @@ namespace VehicleCRM.Infrastructure.Persistence.Configurations
                 .IsRequired();
 
             builder.Property(so => so.Notes)
-                .HasMaxLength(2000)
-                .IsRequired();
+                .HasMaxLength(2000);
 
             builder.HasOne(so => so.Customer)
                 .WithMany()

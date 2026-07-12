@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using FluentValidation;
 using VehicleCRM.Application.Common.Exceptions;
+using VehicleCRM.Domain.Common.Exceptions;
 
 namespace VehicleCRM.API.Middleware;
 
@@ -26,6 +27,10 @@ public class GlobalExceptionHandler : IExceptionHandler
         {
             case ValidationException validationException:
                 problemDetails = HandleValidationException(validationException, httpContext);
+                break;
+
+            case DomainException domainException:
+                problemDetails = HandleDomainException(domainException, httpContext);
                 break;
 
             case EntityNotFoundException entityNotFoundException:
@@ -70,6 +75,29 @@ public class GlobalExceptionHandler : IExceptionHandler
         };
 
         problemDetails.Extensions["errors"] = errors;
+        problemDetails.Extensions["traceId"] = httpContext.TraceIdentifier;
+
+        return problemDetails;
+    }
+
+    private ProblemDetails HandleDomainException(
+        DomainException exception,
+        HttpContext httpContext)
+    {
+        _logger.LogWarning(
+            exception,
+            "Exceção da camada de domínio: {Message}",
+            exception.Message);
+
+        var problemDetails = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.BadRequest,
+            Type = "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+            Title = "Erro de Domínio",
+            Detail = exception.Message,
+            Instance = httpContext.Request.Path
+        };
+
         problemDetails.Extensions["traceId"] = httpContext.TraceIdentifier;
 
         return problemDetails;
