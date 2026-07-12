@@ -4,6 +4,7 @@ using VehicleCRM.Application.Common.Models;
 using VehicleCRM.Domain.Customers.Repositories;
 using VehicleCRM.Domain.SaleOpportunities.Entities;
 using VehicleCRM.Domain.SaleOpportunities.Repositories;
+using VehicleCRM.Domain.SaleOpportunities.Services;
 using VehicleCRM.Domain.Vehicles.Repositories;
 
 namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
@@ -13,15 +14,18 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
         private readonly ISaleOpportunityRepository _saleOpportunityRepository;
         private readonly ICustomerRepository _customerRepository;
         private readonly IVehicleRepository _vehicleRepository;
+        private readonly ISaleOpportunityDomainService _saleOpportunityDomainService;
 
         public CreateSaleOpportunityCommandHandler(
             ISaleOpportunityRepository saleOpportunityRepository,
             ICustomerRepository customerRepository,
-            IVehicleRepository vehicleRepository)
+            IVehicleRepository vehicleRepository,
+            ISaleOpportunityDomainService saleOpportunityDomainService)
         {
             _saleOpportunityRepository = saleOpportunityRepository;
             _customerRepository = customerRepository;
             _vehicleRepository = vehicleRepository;
+            _saleOpportunityDomainService = saleOpportunityDomainService;
         }
 
         public async Task<EntityCreatedResponse> Handle(CreateSaleOpportunityCommand request, CancellationToken cancellationToken)
@@ -39,6 +43,11 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
             {
                 throw new EntityNotFoundException("Veículo", request.VehicleId);
             }
+
+            await _saleOpportunityDomainService.ValidateNewSaleOpportunityAsync(
+                customer,
+                vehicle,
+                cancellationToken);
 
             var saleOpportunity = new SaleOpportunity(
                 customer.Id,

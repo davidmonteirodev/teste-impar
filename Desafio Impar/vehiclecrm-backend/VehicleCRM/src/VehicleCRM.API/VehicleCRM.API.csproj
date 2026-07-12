@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\VehicleCRM.Application\VehicleCRM.Application.csproj" />
     <ProjectReference Include="..\VehicleCRM.Infrastructure\VehicleCRM.Infrastructure.csproj" />
+    <ProjectReference Include="..\VehicleCRM.IoC\VehicleCRM.IoC.csproj" />
   </ItemGroup>
 
 </Project>

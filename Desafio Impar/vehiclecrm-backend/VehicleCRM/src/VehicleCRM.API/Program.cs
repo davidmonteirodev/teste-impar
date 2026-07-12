@@ -1,16 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using VehicleCRM.API.Middleware;
-using VehicleCRM.Application;
-using VehicleCRM.Infrastructure;
 using VehicleCRM.Infrastructure.Persistence.Contexts;
 using VehicleCRM.Infrastructure.Persistence.Extensions;
+using VehicleCRM.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<VehicleCrmDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("VehicleCrmConnection")));
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure();
+builder.Services.AddVehicleCrmServices();
 
 builder.Services.AddCors(options =>
 {

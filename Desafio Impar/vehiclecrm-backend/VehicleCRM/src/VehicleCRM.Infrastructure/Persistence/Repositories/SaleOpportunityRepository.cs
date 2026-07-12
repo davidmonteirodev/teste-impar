@@ -62,5 +62,11 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(so => so.Id == id, cancellationToken);
         }
+
+        public async Task<bool> ExistsByCustomerAndVehicleAsync(long customerId, long vehicleId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<SaleOpportunity>()
+                .AnyAsync(so => so.CustomerId == customerId && so.VehicleId == vehicleId, cancellationToken);
+        }
     }
 }

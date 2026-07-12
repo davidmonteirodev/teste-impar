@@ -12,6 +12,11 @@
   <Folder Name="/src/Infrastructure/">
     <Project Path="src/VehicleCRM.Infrastructure/VehicleCRM.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/IoC/">
+    <Project Path="src/VehicleCRM.IoC/VehicleCRM.IoC.csproj">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
+  </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/VehicleCRM.Test/VehicleCRM.Test.csproj" Id="36e03e00-b3b3-4f17-9ab7-e1d1d3ec24b8" />
   </Folder>

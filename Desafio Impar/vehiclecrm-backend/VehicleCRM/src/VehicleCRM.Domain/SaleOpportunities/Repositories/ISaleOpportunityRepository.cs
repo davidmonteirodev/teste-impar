@@ -11,5 +11,7 @@ namespace VehicleCRM.Domain.SaleOpportunities.Repositories
             CancellationToken cancellationToken = default);
 
         Task<SaleOpportunity> GetByIdWithRelationsAsync(long id, CancellationToken cancellationToken = default);
+
+        Task<bool> ExistsByCustomerAndVehicleAsync(long customerId, long vehicleId, CancellationToken cancellationToken = default);
     }
 }
