@@ -4,6 +4,7 @@ const menuItems = [
   { to: '/', label: 'Home', icon: 'bi-house-fill', end: true },
   { to: '/vehicles', label: 'Veículos', icon: 'bi-car-front-fill', end: false },
   { to: '/customers', label: 'Clientes', icon: 'bi-people-fill', end: false },
+  { to: '/sale-opportunities', label: 'Oportunidades de vendas', icon: 'bi-cash-coin', end: false },
 ]
 
 export default function Sidebar() {
