@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 const menuItems = [
   { to: '/', label: 'Home', icon: 'bi-house-fill', end: true },
   { to: '/vehicles', label: 'Veículos', icon: 'bi-car-front-fill', end: false },
+  { to: '/customers', label: 'Clientes', icon: 'bi-people-fill', end: false },
 ]
 
 export default function Sidebar() {

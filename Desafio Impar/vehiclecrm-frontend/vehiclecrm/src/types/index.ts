@@ -1,11 +1,14 @@
-export type { Vehicle, CreateVehicleDTO, UpdateVehicleDTO, VehicleStatus } from './vehicle'
+export type { Vehicle, CreateVehicleDTO, UpdateVehicleDTO, VehicleStatus, VehicleFilters } from './vehicle'
+export type { Customer, CreateCustomerDTO, UpdateCustomerDTO, CustomerInterest } from './customer'
 
 export interface PaginatedResponse<T> {
-  data: T[]
-  total: number
+  items: T[]
+  totalItems: number
   page: number
   pageSize: number
   totalPages: number
+  hasPreviousPage: boolean
+  hasNextPage: boolean
 }
 
 export interface PaginationParams {

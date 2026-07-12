@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import type { CreateVehicleDTO, VehicleStatus } from '../../types'
+import type { UpdateVehicleDTO, VehicleStatus } from '../../types'
 import { vehicleService } from '../../services/vehicleService'
 
 interface FormState {
@@ -14,56 +14,69 @@ interface FormState {
   status: string
 }
 
-const EMPTY_FORM: FormState = {
-  brand: '',
-  model: '',
-  year: '',
-  priceDigits: '',
-  color: '',
-  mileage: '',
-  status: '',
-}
-
 function formatBRL(digits: string): string {
   if (!digits) return ''
   const value = parseInt(digits.padStart(3, '0'), 10)
-  return (value / 100).toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  })
+  return (value / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
 
-export default function NewVehicle() {
+export default function EditVehicle() {
+  const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const [form, setForm] = useState<FormState>(EMPTY_FORM)
-  const [loading, setLoading] = useState(false)
+  const [form, setForm] = useState<FormState | null>(null)
+  const [loadingData, setLoadingData] = useState(true)
+  const [saving, setSaving] = useState(false)
+
+  useEffect(() => {
+    if (!id) return
+    vehicleService
+      .getById(Number(id))
+      .then(res => {
+        const v = res.data as any
+        setForm({
+          brand: v.brand ?? '',
+          model: v.model ?? '',
+          year: String(v.year ?? ''),
+          priceDigits: String(Math.round((v.price ?? 0) * 100)),
+          color: v.color ?? '',
+          mileage: String(v.mileage ?? ''),
+          status: String(v.status ?? ''),
+        })
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro',
+          text: 'Não foi possível carregar os dados do veículo.',
+          confirmButtonText: 'OK',
+        }).then(() => navigate('/vehicles'))
+      })
+      .finally(() => setLoadingData(false))
+  }, [id, navigate])
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = e.target
-    setForm(prev => ({ ...prev, [name]: value }))
+    setForm(prev => prev ? { ...prev, [name]: value } : prev)
   }
 
   function handlePriceChange(e: React.ChangeEvent<HTMLInputElement>) {
     const digits = e.target.value.replace(/\D/g, '')
-    setForm(prev => ({ ...prev, priceDigits: digits }))
+    setForm(prev => prev ? { ...prev, priceDigits: digits } : prev)
   }
 
   function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
     const digits = e.target.value.replace(/\D/g, '').slice(0, 4)
-    setForm(prev => ({ ...prev, year: digits }))
+    setForm(prev => prev ? { ...prev, year: digits } : prev)
   }
 
   function handleMileageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const digits = e.target.value.replace(/\D/g, '')
-    setForm(prev => ({ ...prev, mileage: digits }))
-  }
-
-  function handleClear() {
-    setForm(EMPTY_FORM)
+    setForm(prev => prev ? { ...prev, mileage: digits } : prev)
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (!form) return
 
     const { brand, model, year, priceDigits, color, mileage, status } = form
 
@@ -87,7 +100,7 @@ export default function NewVehicle() {
       return
     }
 
-    const payload: CreateVehicleDTO = {
+    const payload: UpdateVehicleDTO = {
       brand,
       model,
       year: parseInt(year, 10),
@@ -98,12 +111,12 @@ export default function NewVehicle() {
     }
 
     try {
-      setLoading(true)
-      await vehicleService.create(payload)
+      setSaving(true)
+      await vehicleService.update(Number(id), payload)
       await Swal.fire({
         icon: 'success',
         title: 'Sucesso!',
-        text: 'Veículo cadastrado com sucesso!',
+        text: 'Veículo atualizado com sucesso!',
         confirmButtonText: 'OK',
       })
       navigate('/vehicles')
@@ -111,7 +124,7 @@ export default function NewVehicle() {
       const message =
         err?.response?.data?.message ??
         err?.response?.data ??
-        'Erro ao cadastrar veículo. Tente novamente.'
+        'Erro ao salvar o veículo. Tente novamente.'
       Swal.fire({
         icon: 'error',
         title: 'Erro',
@@ -119,9 +132,20 @@ export default function NewVehicle() {
         confirmButtonText: 'OK',
       })
     } finally {
-      setLoading(false)
+      setSaving(false)
     }
   }
+
+  if (loadingData) {
+    return (
+      <div className="d-flex justify-content-center align-items-center py-5">
+        <div className="spinner-border text-primary" role="status" />
+        <span className="ms-3 text-muted">Carregando dados do veículo...</span>
+      </div>
+    )
+  }
+
+  if (!form) return null
 
   return (
     <div>
@@ -134,7 +158,7 @@ export default function NewVehicle() {
           <i className="bi bi-arrow-left me-1" />
           Voltar
         </button>
-        <h1 className="h3 mb-0">Novo Veículo</h1>
+        <h1 className="h3 mb-0">Editar Veículo</h1>
       </div>
 
       <div className="card shadow-sm">
@@ -261,28 +285,28 @@ export default function NewVehicle() {
               <button
                 type="submit"
                 className="btn btn-primary"
-                disabled={loading}
+                disabled={saving}
               >
-                {loading ? (
+                {saving ? (
                   <>
                     <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" />
-                    Cadastrando...
+                    Salvando...
                   </>
                 ) : (
                   <>
                     <i className="bi bi-check-lg me-1" />
-                    Cadastrar
+                    Salvar
                   </>
                 )}
               </button>
               <button
                 type="button"
                 className="btn btn-outline-secondary"
-                onClick={handleClear}
-                disabled={loading}
+                onClick={() => navigate('/vehicles')}
+                disabled={saving}
               >
-                <i className="bi bi-eraser me-1" />
-                Limpar
+                <i className="bi bi-x-lg me-1" />
+                Cancelar
               </button>
             </div>
           </form>
