@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using VehicleCRM.Domain.Entities;
+using VehicleCRM.Domain.Vehicles.Entities;
 
 namespace VehicleCRM.Infrastructure.Persistence.Configurations
 {

@@ -1,4 +1,4 @@
-﻿namespace VehicleCRM.Domain.Entities.Base
+namespace VehicleCRM.Domain.Common.Entities
 {
     public abstract class BaseEntity
     {

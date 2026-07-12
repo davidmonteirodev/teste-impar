@@ -1,5 +1,5 @@
-using VehicleCRM.Domain.Entities;
-using VehicleCRM.Domain.Interfaces.Repositories;
+using VehicleCRM.Domain.Customers.Entities;
+using VehicleCRM.Domain.Customers.Repositories;
 using VehicleCRM.Infrastructure.Persistence.Contexts;
 using VehicleCRM.Infrastructure.Persistence.Repositories.Base;
 

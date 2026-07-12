@@ -1,7 +1,9 @@
-using VehicleCRM.Domain.Entities.Base;
-using VehicleCRM.Domain.Enums;
+using VehicleCRM.Domain.Common.Entities;
+using VehicleCRM.Domain.Customers.Entities;
+using VehicleCRM.Domain.SaleOpportunities.Enums;
+using VehicleCRM.Domain.Vehicles.Entities;
 
-namespace VehicleCRM.Domain.Entities
+namespace VehicleCRM.Domain.SaleOpportunities.Entities
 {
     public class SaleOpportunity : BaseEntity
     {

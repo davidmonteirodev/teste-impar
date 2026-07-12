@@ -8,7 +8,7 @@ using VehicleCRM.Application.Features.Vehicles.Queries;
 namespace VehicleCRM.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/vehicles")]
     public class VehiclesController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,15 +19,16 @@ namespace VehicleCRM.API.Controllers
         }
 
         /// <summary>
-        /// Retrieves all vehicles
+        /// Retrieves all vehicles with filtering and pagination
         /// </summary>
-        /// <returns>A collection of vehicles</returns>
+        /// <param name="query">Query parameters for filtering and pagination</param>
+        /// <returns>A paginated collection of vehicles</returns>
         /// <response code="200">Successfully retrieved vehicles</response>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IReadOnlyCollection<VehicleResponse>))]
-        public async Task<IActionResult> GetAll()
-        {
-            var result = await _mediator.Send(new GetVehiclesQuery());
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResult<VehicleResponse>))]
+        public async Task<IActionResult> GetAll([FromQuery] GetVehiclesQuery query)
+            {
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
 

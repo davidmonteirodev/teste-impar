@@ -1,4 +1,4 @@
-namespace VehicleCRM.Domain.Enums
+namespace VehicleCRM.Domain.Customers.Enums
 {
     public enum CustomerMainInterest
     {

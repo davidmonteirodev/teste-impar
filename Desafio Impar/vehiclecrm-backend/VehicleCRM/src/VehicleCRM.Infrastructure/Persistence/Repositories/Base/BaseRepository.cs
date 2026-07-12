@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using VehicleCRM.Domain.Entities.Base;
-using VehicleCRM.Domain.Interfaces.Repositories.Base;
+using VehicleCRM.Domain.Common.Entities;
+using VehicleCRM.Domain.Common.Repositories;
 using VehicleCRM.Infrastructure.Persistence.Contexts;
 
 namespace VehicleCRM.Infrastructure.Persistence.Repositories.Base

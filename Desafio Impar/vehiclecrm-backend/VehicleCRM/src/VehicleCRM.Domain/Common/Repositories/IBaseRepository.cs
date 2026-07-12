@@ -1,6 +1,6 @@
-﻿using VehicleCRM.Domain.Entities.Base;
+using VehicleCRM.Domain.Common.Entities;
 
-namespace VehicleCRM.Domain.Interfaces.Repositories.Base
+namespace VehicleCRM.Domain.Common.Repositories
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {

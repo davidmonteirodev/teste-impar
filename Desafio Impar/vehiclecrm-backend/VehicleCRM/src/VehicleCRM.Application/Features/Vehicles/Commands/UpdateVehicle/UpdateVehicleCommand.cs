@@ -1,5 +1,5 @@
 using MediatR;
-using VehicleCRM.Domain.Enums;
+using VehicleCRM.Domain.Vehicles.Enums;
 
 namespace VehicleCRM.Application.Features.Vehicles.Commands
 {

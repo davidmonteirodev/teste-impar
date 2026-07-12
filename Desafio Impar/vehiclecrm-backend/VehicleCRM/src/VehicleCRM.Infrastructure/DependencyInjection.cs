@@ -1,5 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
-using VehicleCRM.Domain.Interfaces.Repositories;
+using VehicleCRM.Domain.Customers.Repositories;
+using VehicleCRM.Domain.SaleOpportunities.Repositories;
+using VehicleCRM.Domain.Vehicles.Repositories;
 using VehicleCRM.Infrastructure.Persistence.Repositories;
 
 namespace VehicleCRM.Infrastructure

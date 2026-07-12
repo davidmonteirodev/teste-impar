@@ -1,5 +1,5 @@
-using VehicleCRM.Domain.Entities;
-using VehicleCRM.Domain.Enums;
+using VehicleCRM.Domain.SaleOpportunities.Entities;
+using VehicleCRM.Domain.SaleOpportunities.Enums;
 
 namespace VehicleCRM.Application.Features.SaleOpportunities
 {

@@ -8,7 +8,7 @@ using VehicleCRM.Application.Features.SaleOpportunities.Queries;
 namespace VehicleCRM.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/sale-opportunities")]
     public class SaleOpportunitiesController : ControllerBase
     {
         private readonly IMediator _mediator;

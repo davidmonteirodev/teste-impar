@@ -1,5 +1,5 @@
 using MediatR;
-using VehicleCRM.Domain.Interfaces.Repositories;
+using VehicleCRM.Domain.Vehicles.Repositories;
 
 namespace VehicleCRM.Application.Features.Vehicles.Queries
 {

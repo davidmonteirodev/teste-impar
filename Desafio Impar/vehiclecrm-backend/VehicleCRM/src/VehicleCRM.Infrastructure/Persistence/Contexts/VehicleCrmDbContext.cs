@@ -1,6 +1,9 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using VehicleCRM.Domain.Entities;
-using VehicleCRM.Domain.Entities.Base;
+using VehicleCRM.Domain.Common.Entities;
+using VehicleCRM.Domain.Customers.Entities;
+using VehicleCRM.Domain.SaleOpportunities.Entities;
+using VehicleCRM.Domain.Vehicles.Entities;
 
 namespace VehicleCRM.Infrastructure.Persistence.Contexts
 {
@@ -16,6 +19,21 @@ namespace VehicleCRM.Infrastructure.Persistence.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(VehicleCrmDbContext).Assembly);
+
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    var parameter = Expression.Parameter(entityType.ClrType, "e");
+                    var body = Expression.Equal(
+                        Expression.Property(parameter, nameof(BaseEntity.IsDeleted)),
+                        Expression.Constant(false));
+                    var lambda = Expression.Lambda(body, parameter);
+
+                    modelBuilder.Entity(entityType.ClrType).HasQueryFilter(lambda);
+                }
+            }
+
             base.OnModelCreating(modelBuilder);
         }
 

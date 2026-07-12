@@ -1,4 +1,4 @@
-﻿namespace VehicleCRM.Domain.Enums
+﻿namespace VehicleCRM.Domain.Vehicles.Enums
 {
     public enum VehicleSaleStatus
     {

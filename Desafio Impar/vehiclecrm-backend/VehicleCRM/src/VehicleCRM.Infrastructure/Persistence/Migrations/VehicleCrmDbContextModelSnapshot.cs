@@ -22,7 +22,7 @@ namespace VehicleCRM.Infrastructure.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("VehicleCRM.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("VehicleCRM.Domain.Customers.Entities.Customer", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +65,7 @@ namespace VehicleCRM.Infrastructure.Persistence.Migrations
                     b.ToTable("Customers", (string)null);
                 });
 
-            modelBuilder.Entity("VehicleCRM.Domain.Entities.SaleOpportunity", b =>
+            modelBuilder.Entity("VehicleCRM.Domain.SaleOpportunities.Entities.SaleOpportunity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,7 +111,7 @@ namespace VehicleCRM.Infrastructure.Persistence.Migrations
                     b.ToTable("SaleOpportunities", (string)null);
                 });
 
-            modelBuilder.Entity("VehicleCRM.Domain.Entities.Vehicle", b =>
+            modelBuilder.Entity("VehicleCRM.Domain.Vehicles.Entities.Vehicle", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -163,15 +163,15 @@ namespace VehicleCRM.Infrastructure.Persistence.Migrations
                     b.ToTable("Vehicles", (string)null);
                 });
 
-            modelBuilder.Entity("VehicleCRM.Domain.Entities.SaleOpportunity", b =>
+            modelBuilder.Entity("VehicleCRM.Domain.SaleOpportunities.Entities.SaleOpportunity", b =>
                 {
-                    b.HasOne("VehicleCRM.Domain.Entities.Customer", "Customer")
+                    b.HasOne("VehicleCRM.Domain.Customers.Entities.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("VehicleCRM.Domain.Entities.Vehicle", "Vehicle")
+                    b.HasOne("VehicleCRM.Domain.Vehicles.Entities.Vehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Restrict)

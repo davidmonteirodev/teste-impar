@@ -1,5 +1,5 @@
-using VehicleCRM.Domain.Entities;
-using VehicleCRM.Domain.Enums;
+using VehicleCRM.Domain.Vehicles.Entities;
+using VehicleCRM.Domain.Vehicles.Enums;
 
 namespace VehicleCRM.Application.Features.Vehicles
 {

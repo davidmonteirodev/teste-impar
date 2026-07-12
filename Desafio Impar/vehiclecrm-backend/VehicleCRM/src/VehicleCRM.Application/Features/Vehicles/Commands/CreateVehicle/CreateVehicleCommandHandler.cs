@@ -1,7 +1,7 @@
 using MediatR;
 using VehicleCRM.Application.Common.Models;
-using VehicleCRM.Domain.Entities;
-using VehicleCRM.Domain.Interfaces.Repositories;
+using VehicleCRM.Domain.Vehicles.Entities;
+using VehicleCRM.Domain.Vehicles.Repositories;
 
 namespace VehicleCRM.Application.Features.Vehicles.Commands
 {
