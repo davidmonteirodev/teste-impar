@@ -19,15 +19,16 @@ namespace VehicleCRM.API.Controllers
         }
 
         /// <summary>
-        /// Retrieves all sale opportunities
+        /// Retrieves all sale opportunities with filtering and pagination
         /// </summary>
-        /// <returns>A collection of sale opportunities</returns>
+        /// <param name="query">Query parameters for filtering and pagination</param>
+        /// <returns>A paginated collection of sale opportunities</returns>
         /// <response code="200">Successfully retrieved sale opportunities</response>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IReadOnlyCollection<SaleOpportunityResponse>))]
-        public async Task<IActionResult> GetAll()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResult<SaleOpportunityResponse>))]
+        public async Task<IActionResult> GetAll([FromQuery] GetSaleOpportunitiesQuery query)
         {
-            var result = await _mediator.Send(new GetSaleOpportunitiesQuery());
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
 

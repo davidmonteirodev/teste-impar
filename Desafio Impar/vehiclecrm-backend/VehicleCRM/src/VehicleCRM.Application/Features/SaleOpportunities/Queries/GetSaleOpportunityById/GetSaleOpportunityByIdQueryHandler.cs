@@ -14,7 +14,7 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Queries
 
         public async Task<SaleOpportunityResponse> Handle(GetSaleOpportunityByIdQuery request, CancellationToken cancellationToken)
         {
-            var saleOpportunity = await _saleOpportunityRepository.GetByIdAsync(request.Id, cancellationToken);
+            var saleOpportunity = await _saleOpportunityRepository.GetByIdWithRelationsAsync(request.Id, cancellationToken);
 
             return saleOpportunity.ToResponse();
         }
