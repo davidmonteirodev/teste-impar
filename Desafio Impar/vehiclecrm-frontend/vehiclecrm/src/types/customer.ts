@@ -18,3 +18,10 @@ export interface CreateCustomerDTO {
 }
 
 export type UpdateCustomerDTO = Partial<CreateCustomerDTO>
+
+export interface CustomerFilters {
+  name?: string
+  email?: string
+  phone?: string
+  mainInterest?: number
+}

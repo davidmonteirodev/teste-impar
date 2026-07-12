@@ -1,5 +1,5 @@
 export type { Vehicle, CreateVehicleDTO, UpdateVehicleDTO, VehicleStatus, VehicleFilters } from './vehicle'
-export type { Customer, CreateCustomerDTO, UpdateCustomerDTO, CustomerInterest } from './customer'
+export type { Customer, CreateCustomerDTO, UpdateCustomerDTO, CustomerInterest, CustomerFilters } from './customer'
 
 export interface PaginatedResponse<T> {
   items: T[]

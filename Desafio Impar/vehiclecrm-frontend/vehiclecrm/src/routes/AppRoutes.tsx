@@ -6,6 +6,7 @@ import NewVehicle from '../pages/Vehicles/NewVehicle'
 import EditVehicle from '../pages/Vehicles/EditVehicle'
 import Customers from '../pages/Customers'
 import NewCustomer from '../pages/Customers/NewCustomer'
+import EditCustomer from '../pages/Customers/EditCustomer'
 
 export default function AppRoutes() {
   return (
@@ -17,6 +18,7 @@ export default function AppRoutes() {
         <Route path="vehicles/:id/edit" element={<EditVehicle />} />
         <Route path="customers" element={<Customers />} />
         <Route path="customers/new" element={<NewCustomer />} />
+        <Route path="customers/:id/edit" element={<EditCustomer />} />
       </Route>
     </Routes>
   )
