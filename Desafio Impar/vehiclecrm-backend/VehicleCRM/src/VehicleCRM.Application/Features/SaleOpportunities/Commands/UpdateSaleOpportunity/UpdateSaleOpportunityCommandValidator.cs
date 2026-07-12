@@ -27,9 +27,8 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
                 .WithMessage("Valor proposto inválido.");
 
             RuleFor(x => x.Notes)
-                .NotEmpty()
-                .MaximumLength(2000)
-                .WithMessage("Observações são obrigatórias e devem possuir no máximo 2000 caracteres.");
+                .NotEmpty().WithMessage("Observações são obrigatórias.")
+                .MaximumLength(2000).WithMessage("Observações devem possuir no máximo 2000 caracteres.");
         }
     }
 }

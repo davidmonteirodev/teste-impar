@@ -11,14 +11,12 @@ namespace VehicleCRM.Application.Features.Vehicles.Commands
                 .WithMessage("Id inválido.");
 
             RuleFor(x => x.Brand)
-                .NotEmpty()
-                .MaximumLength(150)
-                .WithMessage("Marca é obrigatória e deve possuir no máximo 150 caracteres.");
+                .NotEmpty().WithMessage("Marca é obrigatória.")
+                .MaximumLength(150).WithMessage("Marca deve possuir no máximo 150 caracteres.");
 
             RuleFor(x => x.Model)
-                .NotEmpty()
-                .MaximumLength(150)
-                .WithMessage("Modelo é obrigatório e deve possuir no máximo 150 caracteres.");
+                .NotEmpty().WithMessage("Modelo é obrigatório.")
+                .MaximumLength(150).WithMessage("Modelo deve possuir no máximo 150 caracteres.");
 
             RuleFor(x => x.Year)
                 .InclusiveBetween(1886, DateTime.UtcNow.Year + 1)
@@ -29,9 +27,8 @@ namespace VehicleCRM.Application.Features.Vehicles.Commands
                 .WithMessage("Preço inválido.");
 
             RuleFor(x => x.Color)
-                .NotEmpty()
-                .MaximumLength(50)
-                .WithMessage("Cor é obrigatória e deve possuir no máximo 50 caracteres.");
+                .NotEmpty().WithMessage("Cor é obrigatória.")
+                .MaximumLength(50).WithMessage("Cor deve possuir no máximo 50 caracteres.");
 
             RuleFor(x => x.Mileage)
                 .GreaterThanOrEqualTo(0)

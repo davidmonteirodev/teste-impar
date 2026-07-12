@@ -1,4 +1,5 @@
 using MediatR;
+using VehicleCRM.Application.Common.Exceptions;
 using VehicleCRM.Domain.Customers.Repositories;
 
 namespace VehicleCRM.Application.Features.Customers.Commands
@@ -15,6 +16,11 @@ namespace VehicleCRM.Application.Features.Customers.Commands
         public async Task Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = await _customerRepository.GetByIdAsync(request.Id, cancellationToken);
+
+            if (customer is null)
+            {
+                throw new EntityNotFoundException("Cliente", request.Id);
+            }
 
             customer.Update(request.Name, request.Email, request.Phone, request.MainInterest);
 

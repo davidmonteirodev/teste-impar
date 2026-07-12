@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using VehicleCRM.API.Middleware;
 using VehicleCRM.Application;
 using VehicleCRM.Infrastructure;
 using VehicleCRM.Infrastructure.Persistence.Contexts;
@@ -21,6 +22,10 @@ builder.Services.AddCors(options =>
     });
 });
 
+// Configure global exception handler
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -34,6 +39,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Enable exception handling middleware
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

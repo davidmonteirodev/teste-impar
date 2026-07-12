@@ -16,18 +16,12 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories.Base
 
         public virtual async Task InsertAsync(T entity, CancellationToken cancellationToken = default)
         {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
-
             await _context.Set<T>().AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
         }
 
         public virtual async Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
         {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
-
             _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync(cancellationToken);
         }
@@ -36,11 +30,11 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories.Base
         {
             var entity = await _context.Set<T>().FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 
-            if (entity == null)
-                throw new KeyNotFoundException($"Entity with id {id} not found");
-
-            _context.Set<T>().Remove(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            if (entity is not null)
+            {
+                _context.Set<T>().Remove(entity);
+                await _context.SaveChangesAsync(cancellationToken);
+            }
         }
 
         public virtual async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
@@ -52,14 +46,9 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories.Base
 
         public virtual async Task<T> GetByIdAsync(long id, CancellationToken cancellationToken = default)
         {
-            var entity = await _context.Set<T>()
+            return await _context.Set<T>()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
-
-            if (entity == null)
-                throw new KeyNotFoundException($"Entity with id {id} not found");
-
-            return entity;
         }
     }
 }

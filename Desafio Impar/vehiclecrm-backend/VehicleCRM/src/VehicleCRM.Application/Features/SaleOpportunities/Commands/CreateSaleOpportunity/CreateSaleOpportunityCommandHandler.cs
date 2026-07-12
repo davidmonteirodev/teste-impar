@@ -1,4 +1,5 @@
 using MediatR;
+using VehicleCRM.Application.Common.Exceptions;
 using VehicleCRM.Application.Common.Models;
 using VehicleCRM.Domain.Customers.Repositories;
 using VehicleCRM.Domain.SaleOpportunities.Entities;
@@ -26,7 +27,18 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
         public async Task<EntityCreatedResponse> Handle(CreateSaleOpportunityCommand request, CancellationToken cancellationToken)
         {
             var customer = await _customerRepository.GetByIdAsync(request.CustomerId, cancellationToken);
+
+            if(customer is null)
+            {
+                throw new EntityNotFoundException("Cliente", request.CustomerId);
+            }
+
             var vehicle = await _vehicleRepository.GetByIdAsync(request.VehicleId, cancellationToken);
+
+            if(vehicle is null)
+            {
+                throw new EntityNotFoundException("Veículo", request.VehicleId);
+            }
 
             var saleOpportunity = new SaleOpportunity(
                 customer.Id,
