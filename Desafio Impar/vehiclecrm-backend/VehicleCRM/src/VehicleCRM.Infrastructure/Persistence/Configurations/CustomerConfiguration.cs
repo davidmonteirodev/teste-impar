@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using VehicleCRM.Domain.Customers.Entities;
+using VehicleCRM.Domain.Customers.ValueObjects;
 
 namespace VehicleCRM.Infrastructure.Persistence.Configurations
 {
@@ -32,7 +33,10 @@ namespace VehicleCRM.Infrastructure.Persistence.Configurations
 
             builder.Property(c => c.Phone)
                 .HasMaxLength(30)
-                .IsRequired();
+                .IsRequired()
+                .HasConversion(
+                    phone => phone.Value,
+                    value => Phone.Create(value));
 
             builder.Property(c => c.MainInterest)
                 .HasConversion<int>()

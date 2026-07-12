@@ -19,15 +19,16 @@ namespace VehicleCRM.API.Controllers
         }
 
         /// <summary>
-        /// Retrieves all customers
+        /// Retrieves all customers with filtering and pagination
         /// </summary>
-        /// <returns>A collection of customers</returns>
+        /// <param name="query">Query parameters for filtering and pagination</param>
+        /// <returns>A paginated collection of customers</returns>
         /// <response code="200">Successfully retrieved customers</response>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IReadOnlyCollection<CustomerResponse>))]
-        public async Task<IActionResult> GetAll()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResult<CustomerResponse>))]
+        public async Task<IActionResult> GetAll([FromQuery] GetCustomersQuery query)
         {
-            var result = await _mediator.Send(new GetCustomersQuery());
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
 
