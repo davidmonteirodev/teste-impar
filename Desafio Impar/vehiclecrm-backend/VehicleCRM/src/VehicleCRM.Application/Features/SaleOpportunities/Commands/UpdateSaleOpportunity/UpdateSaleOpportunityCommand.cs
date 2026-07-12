@@ -9,5 +9,5 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
         long VehicleId,
         SaleOpportunityStatus Status,
         decimal ProposedValue,
-        string Notes) : IRequest;
+        string? Notes) : IRequest;
 }
