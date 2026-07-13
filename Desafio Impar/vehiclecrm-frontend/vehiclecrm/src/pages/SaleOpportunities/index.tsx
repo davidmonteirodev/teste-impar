@@ -59,8 +59,9 @@ function buildColumns(
           </button>
           <button
             className="btn btn-sm btn-outline-primary"
-            title="Editar"
+            title={row.status === 4 ? 'Oportunidade vendida não pode ser editada' : 'Editar'}
             onClick={() => onEdit(row.id)}
+            disabled={row.status === 4}
           >
             <i className="bi bi-pencil" />
           </button>

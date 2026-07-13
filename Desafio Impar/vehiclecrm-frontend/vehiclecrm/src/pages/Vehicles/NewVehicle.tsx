@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import type { CreateVehicleDTO, VehicleStatus } from '../../types'
+import type { CreateVehicleDTO } from '../../types'
 import { vehicleService } from '../../services/vehicleService'
 
 interface FormState {
@@ -11,7 +11,6 @@ interface FormState {
   priceDigits: string
   color: string
   mileage: string
-  status: string
 }
 
 const EMPTY_FORM: FormState = {
@@ -21,7 +20,6 @@ const EMPTY_FORM: FormState = {
   priceDigits: '',
   color: '',
   mileage: '',
-  status: '',
 }
 
 function formatBRL(digits: string): string {
@@ -65,9 +63,9 @@ export default function NewVehicle() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
-    const { brand, model, year, priceDigits, color, mileage, status } = form
+    const { brand, model, year, priceDigits, color, mileage } = form
 
-    if (!brand || !model || !year || !priceDigits || !color || !mileage || !status) {
+    if (!brand || !model || !year || !priceDigits || !color || !mileage) {
       Swal.fire({
         icon: 'warning',
         title: 'Atenção',
@@ -94,7 +92,6 @@ export default function NewVehicle() {
       price: parseInt(priceDigits, 10) / 100,
       color,
       mileage: parseInt(mileage, 10),
-      status: parseInt(status, 10) as VehicleStatus,
     }
 
     try {
@@ -171,7 +168,7 @@ export default function NewVehicle() {
                 />
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <label htmlFor="year" className="form-label fw-semibold">
                   Ano <span className="text-danger">*</span>
                 </label>
@@ -188,7 +185,7 @@ export default function NewVehicle() {
                 />
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <label htmlFor="price" className="form-label fw-semibold">
                   Preço <span className="text-danger">*</span>
                 </label>
@@ -204,7 +201,7 @@ export default function NewVehicle() {
                 />
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <label htmlFor="color" className="form-label fw-semibold">
                   Cor <span className="text-danger">*</span>
                 </label>
@@ -219,7 +216,7 @@ export default function NewVehicle() {
                 />
               </div>
 
-              <div className="col-md-6">
+              <div className="col-md-3">
                 <label htmlFor="mileage" className="form-label fw-semibold">
                   Quilometragem <span className="text-danger">*</span>
                 </label>
@@ -236,24 +233,6 @@ export default function NewVehicle() {
                   />
                   <span className="input-group-text">km</span>
                 </div>
-              </div>
-
-              <div className="col-md-6">
-                <label htmlFor="status" className="form-label fw-semibold">
-                  Status <span className="text-danger">*</span>
-                </label>
-                <select
-                  id="status"
-                  name="status"
-                  className="form-select"
-                  value={form.status}
-                  onChange={handleChange}
-                >
-                  <option value="">Selecione o status</option>
-                  <option value="1">Disponível</option>
-                  <option value="2">Reservado</option>
-                  <option value="3">Vendido</option>
-                </select>
               </div>
             </div>
 

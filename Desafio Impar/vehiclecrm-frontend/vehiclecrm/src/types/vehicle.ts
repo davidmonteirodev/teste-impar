@@ -21,11 +21,8 @@ export interface CreateVehicleDTO {
   price: number
   color: string
   mileage: number
-  status: VehicleStatus
   plate?: string
 }
-
-export type UpdateVehicleDTO = Partial<CreateVehicleDTO>
 
 export interface VehicleFilters {
   brand?: string

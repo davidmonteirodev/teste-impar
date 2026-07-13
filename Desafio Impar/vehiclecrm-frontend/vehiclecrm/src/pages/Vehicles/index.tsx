@@ -10,8 +10,8 @@ import VehicleDetailModal from './VehicleDetailModal'
 
 const STATUS_LABELS: Record<number, { label: string; className: string }> = {
   1: { label: 'Disponível', className: 'badge bg-success' },
-  2: { label: 'Vendido', className: 'badge bg-secondary' },
-  3: { label: 'Reservado', className: 'badge bg-warning text-dark' },
+  2: { label: 'Reservado', className: 'badge bg-warning text-dark' },
+  3: { label: 'Vendido', className: 'badge bg-secondary' },
 }
 
 function buildColumns(
@@ -57,8 +57,9 @@ function buildColumns(
           </button>
           <button
             className="btn btn-sm btn-outline-primary"
-            title="Editar"
+            title={row.status === 3 ? 'Veículo vendido não pode ser editado' : row.status === 2 ? 'Veículo reservado não pode ser editado' : 'Editar'}
             onClick={() => onEdit(row.id)}
+            disabled={row.status === 2 || row.status === 3}
           >
             <i className="bi bi-pencil" />
           </button>

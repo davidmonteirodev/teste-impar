@@ -9,8 +9,8 @@ interface Props {
 
 const STATUS_LABELS: Record<number, { label: string; className: string }> = {
   1: { label: 'Disponível', className: 'badge bg-success' },
-  2: { label: 'Vendido', className: 'badge bg-secondary' },
-  3: { label: 'Reservado', className: 'badge bg-warning text-dark' },
+  2: { label: 'Reservado', className: 'badge bg-warning text-dark' },
+  3: { label: 'Vendido', className: 'badge bg-secondary' },
 }
 
 function formatDate(value: string | null | undefined): string {

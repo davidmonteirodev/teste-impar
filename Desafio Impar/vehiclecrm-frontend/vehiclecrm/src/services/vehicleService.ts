@@ -1,5 +1,5 @@
 import api from './api'
-import type { Vehicle, CreateVehicleDTO, UpdateVehicleDTO, VehicleFilters } from '../types'
+import type { Vehicle, CreateVehicleDTO, VehicleFilters } from '../types'
 import type { PaginatedResponse } from '../types'
 
 export interface VehicleQueryParams extends VehicleFilters {
@@ -26,7 +26,7 @@ export const vehicleService = {
   },
   getById: (id: number) => api.get<Vehicle>(`vehicles/${id}`),
   create: (data: CreateVehicleDTO) => api.post<Vehicle>('vehicles', data),
-  update: (id: number, data: UpdateVehicleDTO) =>
+  update: (id: number, data: CreateVehicleDTO) =>
     api.put<Vehicle>('vehicles', { id, ...data }),
   remove: (id: number) => api.delete(`vehicles/${id}`),
 }
