@@ -17,7 +17,7 @@ export interface CreateCustomerDTO {
   mainInterest: CustomerInterest
 }
 
-export type UpdateCustomerDTO = Partial<CreateCustomerDTO>
+export type UpdateCustomerDTO = Partial<Omit<CreateCustomerDTO, 'email'>>
 
 export interface CustomerFilters {
   name?: string

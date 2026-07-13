@@ -74,7 +74,7 @@ export default function EditCustomer() {
 
     const { name, email, phone, mainInterest } = form
 
-    if (!name || !email || !phone || !mainInterest) {
+    if (!name || !phone || !mainInterest) {
       Swal.fire({
         icon: 'warning',
         title: 'Atenção',
@@ -84,20 +84,8 @@ export default function EditCustomer() {
       return
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Atenção',
-        text: 'Informe um e-mail válido.',
-        confirmButtonText: 'OK',
-      })
-      return
-    }
-
     const payload: UpdateCustomerDTO = {
       name,
-      email,
       phone: phone.replace(/\D/g, ''),
       mainInterest: parseInt(mainInterest, 10) as CustomerInterest,
     }
@@ -174,16 +162,15 @@ export default function EditCustomer() {
 
               <div className="col-md-6">
                 <label htmlFor="email" className="form-label fw-semibold">
-                  E-mail <span className="text-danger">*</span>
+                  E-mail
                 </label>
                 <input
                   id="email"
                   name="email"
                   type="email"
                   className="form-control"
-                  placeholder="Ex: joao@email.com"
                   value={form.email}
-                  onChange={handleChange}
+                  disabled
                 />
               </div>
 
