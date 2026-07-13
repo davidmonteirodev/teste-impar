@@ -29,7 +29,14 @@ namespace VehicleCRM.Infrastructure.Persistence.Configurations
 
             builder.Property(c => c.Email)
                 .HasMaxLength(150)
-                .IsRequired();
+                .IsRequired()
+                .HasConversion(
+                    email => email.Value,
+                    value => Email.Create(value));
+
+            builder.HasIndex(c => c.Email)
+                .IsUnique()
+                .HasDatabaseName("IX_Customers_Email_Unique");
 
             builder.Property(c => c.Phone)
                 .HasMaxLength(30)

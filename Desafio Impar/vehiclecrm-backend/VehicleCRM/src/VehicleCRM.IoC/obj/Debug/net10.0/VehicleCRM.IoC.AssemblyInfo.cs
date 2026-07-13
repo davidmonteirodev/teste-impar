@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VehicleCRM.IoC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0f55502cef81a52ce6ca6516f89509cc4e2fb23")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b3e7e8ce449ce299204bbed8dccaad3775b0fc3f")]
 [assembly: System.Reflection.AssemblyProductAttribute("VehicleCRM.IoC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VehicleCRM.IoC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

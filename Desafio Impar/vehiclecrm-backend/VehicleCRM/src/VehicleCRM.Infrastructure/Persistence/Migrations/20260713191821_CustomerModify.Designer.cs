@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleCRM.Infrastructure.Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using VehicleCRM.Infrastructure.Persistence.Contexts;
 namespace VehicleCRM.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(VehicleCrmDbContext))]
-    partial class VehicleCrmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260713191821_CustomerModify")]
+    partial class CustomerModify
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

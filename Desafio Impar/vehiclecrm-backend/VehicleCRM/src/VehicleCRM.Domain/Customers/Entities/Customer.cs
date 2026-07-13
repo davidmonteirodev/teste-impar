@@ -11,13 +11,13 @@ namespace VehicleCRM.Domain.Customers.Entities
         private Customer(string name, string email, string phone, CustomerMainInterest mainInterest)
         {
             Name = name;
-            Email = email;
+            Email = Email.Create(email);
             Phone = Phone.Create(phone);
             MainInterest = mainInterest;
         }
 
         public virtual string Name { get; private set; }
-        public virtual string Email { get; private set; }
+        public virtual Email Email { get; private set; }
         public virtual Phone Phone { get; private set; }
         public virtual CustomerMainInterest MainInterest { get; private set; }
 
