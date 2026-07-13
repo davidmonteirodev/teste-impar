@@ -22,7 +22,7 @@ namespace VehicleCRM.Application.Features.Customers.Commands
                 throw new EntityNotFoundException("Cliente", request.Id);
             }
 
-            customer.Update(request.Name, request.Email, request.Phone, request.MainInterest);
+            customer.Update(request.Name, request.Phone, request.MainInterest);
 
             await _customerRepository.UpdateAsync(customer, cancellationToken);
         }

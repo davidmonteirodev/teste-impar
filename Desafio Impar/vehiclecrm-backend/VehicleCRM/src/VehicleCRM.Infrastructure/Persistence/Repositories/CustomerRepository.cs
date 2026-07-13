@@ -41,5 +41,14 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories
 
             return (items, totalCount);
         }
+
+        public async Task<bool> ExistsByEmailAsync(
+            string email,
+            CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Customer>()
+                .AsNoTracking()
+                .AnyAsync(c => c.Email == email, cancellationToken);
+        }
     }
 }

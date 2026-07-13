@@ -90,5 +90,11 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories
             return await _context.Set<SaleOpportunity>()
                 .AnyAsync(so => so.VehicleId == vehicleId, cancellationToken);
         }
+
+        public async Task<bool> HasAnyOpportunityForCustomerAsync(long customerId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<SaleOpportunity>()
+                .AnyAsync(so => so.CustomerId == customerId, cancellationToken);
+        }
     }
 }

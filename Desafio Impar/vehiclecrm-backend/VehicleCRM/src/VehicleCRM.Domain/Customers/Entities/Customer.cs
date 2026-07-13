@@ -21,10 +21,9 @@ namespace VehicleCRM.Domain.Customers.Entities
         public virtual Phone Phone { get; private set; }
         public virtual CustomerMainInterest MainInterest { get; private set; }
 
-        public virtual void Update(string name, string email, string phone, CustomerMainInterest mainInterest)
+        public virtual void Update(string name, string phone, CustomerMainInterest mainInterest)
         {
             Name = name;
-            Email = email;
             Phone = Phone.Create(phone);
             MainInterest = mainInterest;
         }

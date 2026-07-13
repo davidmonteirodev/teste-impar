@@ -9,5 +9,9 @@ namespace VehicleCRM.Domain.Customers.Repositories
         Task<(IEnumerable<Customer> Items, int TotalCount)> GetPagedAsync(
             CustomerSearchCriteria criteria,
             CancellationToken cancellationToken = default);
+
+        Task<bool> ExistsByEmailAsync(
+            string email,
+            CancellationToken cancellationToken = default);
     }
 }
