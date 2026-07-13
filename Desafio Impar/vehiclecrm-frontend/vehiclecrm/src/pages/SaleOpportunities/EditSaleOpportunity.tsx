@@ -34,6 +34,7 @@ export default function EditSaleOpportunity() {
   const navigate = useNavigate()
 
   const [form, setForm] = useState<FormState | null>(null)
+  const [originalStatus, setOriginalStatus] = useState<string>('')
   const [loadingData, setLoadingData] = useState(true)
   const [saving, setSaving] = useState(false)
 
@@ -69,6 +70,7 @@ export default function EditSaleOpportunity() {
           proposedValueDigits: String(Math.round(o.proposedValue * 100)),
           notes: o.notes ?? '',
         })
+        setOriginalStatus(String(o.status))
         setCustomerInput(o.customer.name)
         setVehicleInput(o.vehicle.model)
       })
@@ -227,6 +229,8 @@ export default function EditSaleOpportunity() {
     }
   }
 
+  const isFieldDisabled = originalStatus === '2' || originalStatus === '3'
+
   if (loadingData) {
     return (
       <div className="d-flex justify-content-center align-items-center py-5">
@@ -271,6 +275,7 @@ export default function EditSaleOpportunity() {
                     value={customerInput}
                     onChange={handleCustomerInputChange}
                     autoComplete="off"
+                    disabled={isFieldDisabled}
                   />
                   {searchingCustomers && (
                     <div className="position-absolute end-0 top-50 translate-middle-y me-2" style={{ pointerEvents: 'none' }}>
@@ -310,6 +315,7 @@ export default function EditSaleOpportunity() {
                     value={vehicleInput}
                     onChange={handleVehicleInputChange}
                     autoComplete="off"
+                    disabled={isFieldDisabled}
                   />
                   {searchingVehicles && (
                     <div className="position-absolute end-0 top-50 translate-middle-y me-2" style={{ pointerEvents: 'none' }}>
@@ -347,7 +353,11 @@ export default function EditSaleOpportunity() {
                   onChange={e => setForm(prev => prev ? { ...prev, status: e.target.value } : prev)}
                 >
                   <option value="">Selecione o status</option>
-                  {STATUS_OPTIONS.map(opt => (
+                  {STATUS_OPTIONS.filter(opt => {
+                    if (originalStatus === '2') return opt.value !== 1
+                    if (originalStatus === '3') return opt.value !== 1 && opt.value !== 2
+                    return true
+                  }).map(opt => (
                     <option key={opt.value} value={opt.value}>{opt.label}</option>
                   ))}
                 </select>
