@@ -111,6 +111,7 @@ export default function Customers() {
       setFilters(f => ({ ...f }))
     } catch (err: any) {
       const message =
+        err?.response?.data?.detail ??
         err?.response?.data?.message ??
         err?.response?.data ??
         'Ocorreu um erro ao excluir o cliente. Tente novamente.'

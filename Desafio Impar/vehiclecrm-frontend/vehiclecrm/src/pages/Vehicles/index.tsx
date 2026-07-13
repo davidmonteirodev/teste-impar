@@ -57,9 +57,9 @@ function buildColumns(
           </button>
           <button
             className="btn btn-sm btn-outline-primary"
-            title={row.status === 3 ? 'Veículo vendido não pode ser editado' : row.status === 2 ? 'Veículo reservado não pode ser editado' : 'Editar'}
+            title={row.status === 3 ? 'Veículo vendido não pode ser editado' : 'Editar'}
             onClick={() => onEdit(row.id)}
-            disabled={row.status === 2 || row.status === 3}
+            disabled={row.status === 3}
           >
             <i className="bi bi-pencil" />
           </button>
@@ -131,6 +131,7 @@ export default function Vehicles() {
       setFilters(f => ({ ...f }))
     } catch (err: any) {
       const message =
+        err?.response?.data?.detail ??
         err?.response?.data?.message ??
         err?.response?.data ??
         'Ocorreu um erro ao excluir o veículo. Tente novamente.'

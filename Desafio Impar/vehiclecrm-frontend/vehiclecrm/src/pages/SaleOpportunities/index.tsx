@@ -59,9 +59,9 @@ function buildColumns(
           </button>
           <button
             className="btn btn-sm btn-outline-primary"
-            title={row.status === 4 ? 'Oportunidade vendida não pode ser editada' : 'Editar'}
+            title={row.status === 4 ? 'Oportunidade vendida não pode ser editada' : row.status === 5 ? 'Oportunidade perdida não pode ser editada' : 'Editar'}
             onClick={() => onEdit(row.id)}
-            disabled={row.status === 4}
+            disabled={row.status === 4 || row.status === 5}
           >
             <i className="bi bi-pencil" />
           </button>
@@ -129,6 +129,7 @@ export default function SaleOpportunities() {
       setFilters(f => ({ ...f }))
     } catch (err: any) {
       const message =
+        err?.response?.data?.detail ??
         err?.response?.data?.message ??
         err?.response?.data ??
         'Ocorreu um erro ao excluir a oportunidade. Tente novamente.'

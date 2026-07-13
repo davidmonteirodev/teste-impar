@@ -106,6 +106,7 @@ export default function NewVehicle() {
       navigate('/vehicles')
     } catch (err: any) {
       const message =
+        err?.response?.data?.detail ??
         err?.response?.data?.message ??
         err?.response?.data ??
         'Erro ao cadastrar veículo. Tente novamente.'

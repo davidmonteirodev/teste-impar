@@ -1,19 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import type { CreateSaleOpportunityDTO, SaleOpportunityStatus, Vehicle } from '../../types'
+import type { CreateSaleOpportunityDTO, Vehicle } from '../../types'
 import { saleOpportunityService } from '../../services/saleOpportunityService'
 import { customerService } from '../../services/customerService'
 import { vehicleService } from '../../services/vehicleService'
 import type { Customer } from '../../types'
-
-const STATUS_OPTIONS: { value: SaleOpportunityStatus; label: string }[] = [
-  { value: 1, label: 'Novo lead' },
-  { value: 2, label: 'Em negociação' },
-  { value: 3, label: 'Proposta enviada' },
-  { value: 4, label: 'Vendido' },
-  { value: 5, label: 'Perdido' },
-]
 
 function formatBRL(digits: string): string {
   if (!digits) return ''
@@ -24,7 +16,6 @@ function formatBRL(digits: string): string {
 interface FormState {
   customerId: number | null
   vehicleId: number | null
-  status: string
   proposedValueDigits: string
   notes: string
 }
@@ -32,7 +23,6 @@ interface FormState {
 const EMPTY_FORM: FormState = {
   customerId: null,
   vehicleId: null,
-  status: '',
   proposedValueDigits: '',
   notes: '',
 }
@@ -162,9 +152,9 @@ export default function NewSaleOpportunity() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
-    const { customerId, vehicleId, status, proposedValueDigits } = form
+    const { customerId, vehicleId, proposedValueDigits } = form
 
-    if (!customerId || !vehicleId || !status || !proposedValueDigits) {
+    if (!customerId || !vehicleId || !proposedValueDigits) {
       Swal.fire({ icon: 'warning', title: 'Atenção', text: 'Preencha todos os campos obrigatórios.', confirmButtonText: 'OK' })
       return
     }
@@ -172,7 +162,6 @@ export default function NewSaleOpportunity() {
     const payload: CreateSaleOpportunityDTO = {
       customerId,
       vehicleId,
-      status: parseInt(status, 10) as SaleOpportunityStatus,
       proposedValue: parseInt(proposedValueDigits, 10) / 100,
       notes: form.notes || undefined,
     }
@@ -189,6 +178,7 @@ export default function NewSaleOpportunity() {
       navigate('/sale-opportunities')
     } catch (err: any) {
       const message =
+        err?.response?.data?.detail ??
         err?.response?.data?.message ??
         err?.response?.data ??
         'Erro ao cadastrar oportunidade. Tente novamente.'
@@ -223,7 +213,7 @@ export default function NewSaleOpportunity() {
             <div className="row g-3">
 
               {/* Customer autocomplete */}
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <label htmlFor="customerName" className="form-label fw-semibold">
                   Nome do cliente <span className="text-danger">*</span>
                 </label>
@@ -274,7 +264,7 @@ export default function NewSaleOpportunity() {
               </div>
 
               {/* Vehicle autocomplete */}
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <label htmlFor="vehicleModel" className="form-label fw-semibold">
                   Modelo do veículo <span className="text-danger">*</span>
                 </label>
@@ -324,28 +314,8 @@ export default function NewSaleOpportunity() {
                 </div>
               </div>
 
-              {/* Status */}
-              <div className="col-md-6">
-                <label htmlFor="status" className="form-label fw-semibold">
-                  Status <span className="text-danger">*</span>
-                </label>
-                <select
-                  id="status"
-                  className="form-select"
-                  value={form.status}
-                  onChange={e => setForm(prev => ({ ...prev, status: e.target.value }))}
-                >
-                  <option value="">Selecione o status</option>
-                  {STATUS_OPTIONS.map(opt => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
               {/* Proposed value */}
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <label htmlFor="proposedValue" className="form-label fw-semibold">
                   Valor proposto <span className="text-danger">*</span>
                 </label>

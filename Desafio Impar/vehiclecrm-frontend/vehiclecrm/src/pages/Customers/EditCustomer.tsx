@@ -102,6 +102,7 @@ export default function EditCustomer() {
       navigate('/customers')
     } catch (err: any) {
       const message =
+        err?.response?.data?.detail ??
         err?.response?.data?.message ??
         err?.response?.data ??
         'Erro ao salvar o cliente. Tente novamente.'

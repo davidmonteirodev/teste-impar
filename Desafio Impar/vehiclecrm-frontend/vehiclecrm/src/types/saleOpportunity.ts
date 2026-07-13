@@ -20,7 +20,6 @@ export interface SaleOpportunity {
 export interface CreateSaleOpportunityDTO {
   customerId: number
   vehicleId: number
-  status: SaleOpportunityStatus
   proposedValue: number
   notes?: string
 }

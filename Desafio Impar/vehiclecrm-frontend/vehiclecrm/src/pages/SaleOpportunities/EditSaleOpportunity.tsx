@@ -212,6 +212,7 @@ export default function EditSaleOpportunity() {
       navigate('/sale-opportunities')
     } catch (err: any) {
       const message =
+        err?.response?.data?.detail ??
         err?.response?.data?.message ??
         err?.response?.data ??
         'Erro ao salvar a oportunidade. Tente novamente.'
