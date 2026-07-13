@@ -8,7 +8,7 @@ namespace VehicleCRM.Domain.Vehicles.Entities
     {
         protected Vehicle() { }
 
-        public Vehicle(string brand, string model, int year, decimal price, string color, int mileage)
+        private Vehicle(string brand, string model, int year, decimal price, string color, int mileage, VehicleSaleStatus status)
         {
             Brand = brand;
             Model = model;
@@ -16,7 +16,7 @@ namespace VehicleCRM.Domain.Vehicles.Entities
             Price = price;
             Color = color;
             Mileage = mileage;
-            Status = VehicleSaleStatus.Available;
+            Status = status;
         }
 
         public virtual string Brand { get; private set; }
@@ -27,12 +27,16 @@ namespace VehicleCRM.Domain.Vehicles.Entities
         public virtual int Mileage { get; private set; }
         public virtual VehicleSaleStatus Status { get; private set; }
 
+        public static Vehicle Create(string brand, string model, int year, decimal price, string color, int mileage)
+        {
+            return new Vehicle(brand, model, year, price, color, mileage, VehicleSaleStatus.Available);
+        }
+
         public virtual void Update(string brand, string model, int year, decimal price, string color, int mileage)
         {
-            if (Status == VehicleSaleStatus.Sold || Status == VehicleSaleStatus.Reserved)
+            if (Status == VehicleSaleStatus.Sold)
             {
-                var statusName = Status == VehicleSaleStatus.Sold ? "vendido" : "reservado";
-                throw new VehicleCannotBeEditedException(statusName);
+                throw new VehicleCannotBeEditedException("vendido");
             }
 
             Brand = brand;

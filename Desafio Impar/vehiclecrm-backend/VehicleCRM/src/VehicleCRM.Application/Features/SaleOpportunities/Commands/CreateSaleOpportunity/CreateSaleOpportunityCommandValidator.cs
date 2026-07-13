@@ -14,10 +14,6 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
                 .GreaterThan(0)
                 .WithMessage("Id do veículo inválido.");
 
-            RuleFor(x => x.Status)
-                .IsInEnum()
-                .WithMessage("Status inválido.");
-
             RuleFor(x => x.ProposedValue)
                 .GreaterThan(0)
                 .WithMessage("Valor proposto inválido.");

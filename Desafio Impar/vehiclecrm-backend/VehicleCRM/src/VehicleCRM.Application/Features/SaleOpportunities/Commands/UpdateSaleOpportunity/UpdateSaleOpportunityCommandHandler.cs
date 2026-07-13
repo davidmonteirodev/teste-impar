@@ -12,7 +12,6 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
     {
         private readonly ISaleOpportunityRepository _saleOpportunityRepository;
         private readonly ICustomerRepository _customerRepository;
-        private readonly IVehicleRepository _vehicleRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public UpdateSaleOpportunityCommandHandler(
@@ -20,10 +19,10 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
             ICustomerRepository customerRepository,
             IVehicleRepository vehicleRepository,
             IUnitOfWork unitOfWork)
+            : base(vehicleRepository)
         {
             _saleOpportunityRepository = saleOpportunityRepository;
             _customerRepository = customerRepository;
-            _vehicleRepository = vehicleRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -75,7 +74,7 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
 
                 if (previousVehicle is not null)
                 {
-                    await SetVehicleAsAvailableAsync(previousVehicle, _vehicleRepository, cancellationToken);
+                    await SetVehicleAsAvailableAsync(previousVehicle, cancellationToken);
                 }
             }
 
@@ -88,7 +87,7 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
 
             await _saleOpportunityRepository.UpdateAsync(saleOpportunity, cancellationToken);
 
-            await UpdateVehicleStatusBasedOnSaleOpportunityAsync(vehicle, request.Status, _vehicleRepository, cancellationToken);
+            await UpdateVehicleStatusBasedOnSaleOpportunityAsync(vehicle, request.Status, cancellationToken);
 
             await _unitOfWork.CommitTransactionAsync(cancellationToken);
         }

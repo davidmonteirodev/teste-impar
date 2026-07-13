@@ -10,7 +10,7 @@ namespace VehicleCRM.Domain.SaleOpportunities.Entities
     {
         protected SaleOpportunity() { }
 
-        public SaleOpportunity(long customerId, long vehicleId, SaleOpportunityStatus status, decimal proposedValue, string? notes)
+        private SaleOpportunity(long customerId, long vehicleId, SaleOpportunityStatus status, decimal proposedValue, string? notes)
         {
             CustomerId = customerId;
             VehicleId = vehicleId;
@@ -27,6 +27,11 @@ namespace VehicleCRM.Domain.SaleOpportunities.Entities
 
         public virtual Customer Customer { get; private set; }
         public virtual Vehicle Vehicle { get; private set; }
+
+        public static SaleOpportunity Create(long customerId, long vehicleId, decimal proposedValue, string? notes)
+        {
+            return new SaleOpportunity(customerId, vehicleId, SaleOpportunityStatus.NewLead, proposedValue, notes);
+        }
 
         public virtual bool IsFinalized() => Status == SaleOpportunityStatus.Sold || Status == SaleOpportunityStatus.Lost;
 

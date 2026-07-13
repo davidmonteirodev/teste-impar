@@ -16,7 +16,7 @@ namespace VehicleCRM.Application.Features.Vehicles.Commands
 
         public async Task<EntityCreatedResponse> Handle(CreateVehicleCommand request, CancellationToken cancellationToken)
         {
-            var vehicle = new Vehicle(
+            var vehicle = Vehicle.Create(
                 request.Brand,
                 request.Model,
                 request.Year,

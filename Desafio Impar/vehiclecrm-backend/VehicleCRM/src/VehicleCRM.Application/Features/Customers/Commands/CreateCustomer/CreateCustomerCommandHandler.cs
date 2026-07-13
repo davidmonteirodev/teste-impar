@@ -24,7 +24,7 @@ namespace VehicleCRM.Application.Features.Customers.Commands
                 throw new DuplicateCustomerEmailException(request.Email);
             }
 
-            var customer = new Customer(request.Name, request.Email, request.Phone, request.MainInterest);
+            var customer = Customer.Create(request.Name, request.Email, request.Phone, request.MainInterest);
 
            await _customerRepository.InsertAsync(customer, cancellationToken);
 

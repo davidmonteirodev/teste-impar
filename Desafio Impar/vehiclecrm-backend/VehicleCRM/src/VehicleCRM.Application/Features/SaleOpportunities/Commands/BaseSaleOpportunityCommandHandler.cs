@@ -7,10 +7,16 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
 {
     public abstract class BaseSaleOpportunityCommandHandler
     {
-        protected static async Task UpdateVehicleStatusBasedOnSaleOpportunityAsync(
+        protected readonly IVehicleRepository _vehicleRepository;
+
+        protected BaseSaleOpportunityCommandHandler(IVehicleRepository vehicleRepository)
+        {
+            _vehicleRepository = vehicleRepository;
+        }
+
+        protected async Task UpdateVehicleStatusBasedOnSaleOpportunityAsync(
             Vehicle vehicle, 
             SaleOpportunityStatus saleOpportunityStatus, 
-            IVehicleRepository vehicleRepository, 
             CancellationToken cancellationToken)
         {
             var vehicleStatus = saleOpportunityStatus switch
@@ -25,19 +31,18 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
             if (vehicleStatus != vehicle.Status)
             {
                 vehicle.UpdateStatus(vehicleStatus);
-                await vehicleRepository.UpdateAsync(vehicle, cancellationToken);
+                await _vehicleRepository.UpdateAsync(vehicle, cancellationToken);
             }
         }
 
-        protected static async Task SetVehicleAsAvailableAsync(
+        protected async Task SetVehicleAsAvailableAsync(
             Vehicle vehicle,
-            IVehicleRepository vehicleRepository,
             CancellationToken cancellationToken)
         {
             if (vehicle.Status != VehicleSaleStatus.Available)
             {
                 vehicle.UpdateStatus(VehicleSaleStatus.Available);
-                await vehicleRepository.UpdateAsync(vehicle, cancellationToken);
+                await _vehicleRepository.UpdateAsync(vehicle, cancellationToken);
             }
         }
     }

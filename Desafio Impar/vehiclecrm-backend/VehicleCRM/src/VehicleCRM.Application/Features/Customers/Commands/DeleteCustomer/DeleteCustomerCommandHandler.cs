@@ -25,9 +25,7 @@ namespace VehicleCRM.Application.Features.Customers.Commands
                 cancellationToken);
 
             if (hasOpportunities)
-            {
                 throw new CustomerHasSaleOpportunitiesException();
-            }
 
             await _customerRepository.DeleteAsync(request.Id, cancellationToken);
         }
