@@ -35,7 +35,7 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Commands
                 throw new EntityNotFoundException("Oportunidade de Venda", request.Id);
             }
 
-            saleOpportunity.EnsureCanBeEdited(request.CustomerId, request.VehicleId);
+            saleOpportunity.EnsureCanBeEdited(request.CustomerId, request.VehicleId, request.Status);
 
             var customer = await _customerRepository.GetByIdAsync(request.CustomerId, cancellationToken);
 

@@ -37,8 +37,10 @@ namespace VehicleCRM.Domain.SaleOpportunities.Entities
 
         public virtual bool IsInNegotiation() => Status == SaleOpportunityStatus.InNegotiation || Status == SaleOpportunityStatus.ProposalSent;
 
-        public virtual void EnsureCanBeEdited(long newCustomerId, long newVehicleId)
+        public virtual void EnsureCanBeEdited(long newCustomerId, long newVehicleId, SaleOpportunityStatus newStatus)
         {
+            EnsureStatusTransitionIsValid(newStatus);
+
             if (IsFinalized())
             {
                 throw new DomainException("Esta oportunidade está finalizada e não pode mais ser editada.");
@@ -70,6 +72,20 @@ namespace VehicleCRM.Domain.SaleOpportunities.Entities
             if (CustomerId != newCustomerId && IsInNegotiation())
             {
                 throw new DomainException("Não é permitido trocar o cliente quando a oportunidade está em Negociação ou com Proposta Enviada.");
+            }
+        }
+
+        private void EnsureStatusTransitionIsValid(SaleOpportunityStatus newStatus)
+        {
+            if (Status == SaleOpportunityStatus.InNegotiation && newStatus == SaleOpportunityStatus.NewLead)
+            {
+                throw new DomainException("Não é permitido alterar o status de 'Em negociação' para 'Novo lead'.");
+            }
+
+            if (Status == SaleOpportunityStatus.ProposalSent && 
+                (newStatus == SaleOpportunityStatus.NewLead || newStatus == SaleOpportunityStatus.InNegotiation))
+            {
+                throw new DomainException("Não é permitido alterar o status de 'Proposta enviada' para 'Novo lead' ou 'Em negociação'.");
             }
         }
     }
