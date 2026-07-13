@@ -50,5 +50,10 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories
                 .AsNoTracking()
                 .AnyAsync(c => c.Email == email, cancellationToken);
         }
+
+        public async Task<int> GetTotalCountAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Customer>().CountAsync(cancellationToken);
+        }
     }
 }

@@ -96,5 +96,18 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories
             return await _context.Set<SaleOpportunity>()
                 .AnyAsync(so => so.CustomerId == customerId, cancellationToken);
         }
+
+        public async Task<int> GetTotalCountAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<SaleOpportunity>().CountAsync(cancellationToken);
+        }
+
+        public async Task<Dictionary<SaleOpportunityStatus, int>> GetCountByStatusAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<SaleOpportunity>()
+                .GroupBy(so => so.Status)
+                .Select(g => new { Status = g.Key, Count = g.Count() })
+                .ToDictionaryAsync(x => x.Status, x => x.Count, cancellationToken);
+        }
     }
 }

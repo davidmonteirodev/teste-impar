@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using VehicleCRM.Domain.Vehicles.Entities;
+using VehicleCRM.Domain.Vehicles.Enums;
 using VehicleCRM.Domain.Vehicles.Repositories;
 using VehicleCRM.Domain.Vehicles.Repositories.Criteria;
 using VehicleCRM.Infrastructure.Persistence.Contexts;
@@ -55,6 +56,26 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories
                 .ToListAsync(cancellationToken);
 
             return (items, totalCount);
+        }
+
+        public async Task<int> GetTotalCountAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Vehicle>().CountAsync(cancellationToken);
+        }
+
+        public async Task<Dictionary<VehicleSaleStatus, int>> GetCountByStatusAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Vehicle>()
+                .GroupBy(v => v.Status)
+                .Select(g => new { Status = g.Key, Count = g.Count() })
+                .ToDictionaryAsync(x => x.Status, x => x.Count, cancellationToken);
+        }
+
+        public async Task<decimal> GetTotalSoldVehiclesValueAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Vehicle>()
+                .Where(v => v.Status == VehicleSaleStatus.Sold)
+                .SumAsync(v => v.Price, cancellationToken);
         }
     }
 }

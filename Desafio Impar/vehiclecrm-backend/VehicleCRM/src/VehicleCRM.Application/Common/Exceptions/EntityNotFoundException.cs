@@ -1,9 +1,5 @@
 namespace VehicleCRM.Application.Common.Exceptions;
 
-/// <summary>
-/// Exceção lançada quando uma entidade não é encontrada no banco de dados.
-/// Esta exceção pertence à camada de Application pois representa uma preocupação de orquestração.
-/// </summary>
 public class EntityNotFoundException : Exception
 {
     public string EntityName { get; }

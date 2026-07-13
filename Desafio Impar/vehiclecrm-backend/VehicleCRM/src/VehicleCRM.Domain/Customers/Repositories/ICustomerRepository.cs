@@ -13,5 +13,7 @@ namespace VehicleCRM.Domain.Customers.Repositories
         Task<bool> ExistsByEmailAsync(
             string email,
             CancellationToken cancellationToken = default);
+
+        Task<int> GetTotalCountAsync(CancellationToken cancellationToken = default);
     }
 }

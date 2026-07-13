@@ -1,5 +1,6 @@
 using VehicleCRM.Domain.Common.Repositories;
 using VehicleCRM.Domain.SaleOpportunities.Entities;
+using VehicleCRM.Domain.SaleOpportunities.Enums;
 using VehicleCRM.Domain.SaleOpportunities.Repositories.Criteria;
 
 namespace VehicleCRM.Domain.SaleOpportunities.Repositories
@@ -19,5 +20,9 @@ namespace VehicleCRM.Domain.SaleOpportunities.Repositories
         Task<bool> HasAnyOpportunityForVehicleAsync(long vehicleId, CancellationToken cancellationToken = default);
 
         Task<bool> HasAnyOpportunityForCustomerAsync(long customerId, CancellationToken cancellationToken = default);
+
+        Task<int> GetTotalCountAsync(CancellationToken cancellationToken = default);
+
+        Task<Dictionary<SaleOpportunityStatus, int>> GetCountByStatusAsync(CancellationToken cancellationToken = default);
     }
 }
