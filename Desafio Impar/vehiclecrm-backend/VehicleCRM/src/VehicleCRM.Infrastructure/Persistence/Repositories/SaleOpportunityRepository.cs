@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using VehicleCRM.Domain.SaleOpportunities.Entities;
+using VehicleCRM.Domain.SaleOpportunities.Enums;
 using VehicleCRM.Domain.SaleOpportunities.Repositories;
 using VehicleCRM.Domain.SaleOpportunities.Repositories.Criteria;
 using VehicleCRM.Infrastructure.Persistence.Contexts;
@@ -67,6 +68,27 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories
         {
             return await _context.Set<SaleOpportunity>()
                 .AnyAsync(so => so.CustomerId == customerId && so.VehicleId == vehicleId, cancellationToken);
+        }
+
+        public async Task<bool> HasActiveOpportunityForVehicleAsync(long vehicleId, long? excludeOpportunityId = null, CancellationToken cancellationToken = default)
+        {
+            var query = _context.Set<SaleOpportunity>()
+                .Where(so => so.VehicleId == vehicleId
+                    && so.Status != SaleOpportunityStatus.Sold
+                    && so.Status != SaleOpportunityStatus.Lost);
+
+            if (excludeOpportunityId.HasValue)
+            {
+                query = query.Where(so => so.Id != excludeOpportunityId.Value);
+            }
+
+            return await query.AnyAsync(cancellationToken);
+        }
+
+        public async Task<bool> HasAnyOpportunityForVehicleAsync(long vehicleId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<SaleOpportunity>()
+                .AnyAsync(so => so.VehicleId == vehicleId, cancellationToken);
         }
     }
 }

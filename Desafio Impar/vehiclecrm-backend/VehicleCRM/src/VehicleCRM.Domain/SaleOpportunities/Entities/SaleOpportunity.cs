@@ -1,4 +1,5 @@
 using VehicleCRM.Domain.Common.Entities;
+using VehicleCRM.Domain.Common.Exceptions;
 using VehicleCRM.Domain.Customers.Entities;
 using VehicleCRM.Domain.SaleOpportunities.Enums;
 using VehicleCRM.Domain.Vehicles.Entities;
@@ -27,6 +28,21 @@ namespace VehicleCRM.Domain.SaleOpportunities.Entities
         public virtual Customer Customer { get; private set; }
         public virtual Vehicle Vehicle { get; private set; }
 
+        public virtual bool IsFinalized() => Status == SaleOpportunityStatus.Sold || Status == SaleOpportunityStatus.Lost;
+
+        public virtual bool IsInNegotiation() => Status == SaleOpportunityStatus.InNegotiation || Status == SaleOpportunityStatus.ProposalSent;
+
+        public virtual void EnsureCanBeEdited(long newCustomerId, long newVehicleId)
+        {
+            if (IsFinalized())
+            {
+                throw new DomainException("Esta oportunidade está finalizada e não pode mais ser editada.");
+            }
+
+            EnsureVehicleCanBeChanged(newVehicleId);
+            EnsureCustomerCanBeChanged(newCustomerId);
+        }
+
         public virtual void Update(long customerId, long vehicleId, SaleOpportunityStatus status, decimal proposedValue, string? notes)
         {
             CustomerId = customerId;
@@ -34,6 +50,22 @@ namespace VehicleCRM.Domain.SaleOpportunities.Entities
             Status = status;
             ProposedValue = proposedValue;
             Notes = notes;
+        }
+
+        private void EnsureVehicleCanBeChanged(long newVehicleId)
+        {
+            if (VehicleId != newVehicleId && IsInNegotiation())
+            {
+                throw new DomainException("Não é permitido trocar o veículo quando a oportunidade está em Negociação ou com Proposta Enviada.");
+            }
+        }
+
+        private void EnsureCustomerCanBeChanged(long newCustomerId)
+        {
+            if (CustomerId != newCustomerId && IsInNegotiation())
+            {
+                throw new DomainException("Não é permitido trocar o cliente quando a oportunidade está em Negociação ou com Proposta Enviada.");
+            }
         }
     }
 }

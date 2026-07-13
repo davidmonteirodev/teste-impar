@@ -33,10 +33,6 @@ namespace VehicleCRM.Application.Features.Vehicles.Commands
             RuleFor(x => x.Mileage)
                 .GreaterThanOrEqualTo(0)
                 .WithMessage("Quilometragem inválida.");
-
-            RuleFor(x => x.Status)
-                .IsInEnum()
-                .WithMessage("Status inválido.");
         }
     }
 }

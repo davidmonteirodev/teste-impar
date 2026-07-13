@@ -69,7 +69,7 @@ namespace VehicleCRM.API.Controllers
         /// </summary>
         /// <param name="request">Updated vehicle details</param>
         /// <response code="204">Vehicle successfully updated</response>
-        /// <response code="400">Invalid vehicle data</response>
+        /// <response code="400">Invalid vehicle data or vehicle is reserved/sold</response>
         /// <response code="404">Vehicle not found</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -86,9 +86,11 @@ namespace VehicleCRM.API.Controllers
         /// </summary>
         /// <param name="id">The vehicle ID</param>
         /// <response code="204">Vehicle successfully deleted</response>
+        /// <response code="400">Vehicle has associated sale opportunities</response>
         /// <response code="404">Vehicle not found</response>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(long id)
         {

@@ -2,11 +2,13 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using VehicleCRM.Application.Common.Behaviors;
+using VehicleCRM.Domain.Common.UnitOfWork;
 using VehicleCRM.Domain.Customers.Repositories;
 using VehicleCRM.Domain.SaleOpportunities.Repositories;
 using VehicleCRM.Domain.SaleOpportunities.Services;
 using VehicleCRM.Domain.Vehicles.Repositories;
 using VehicleCRM.Infrastructure.Persistence.Repositories;
+using VehicleCRM.Infrastructure.Persistence.UnitOfWork;
 
 namespace VehicleCRM.IoC
 {
@@ -28,7 +30,9 @@ namespace VehicleCRM.IoC
             services.AddValidatorsFromAssembly(applicationAssembly);
 
             services.AddMediatR(config =>
-                config.RegisterServicesFromAssembly(applicationAssembly));
+            {
+                config.RegisterServicesFromAssembly(applicationAssembly);
+            });
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
@@ -37,6 +41,7 @@ namespace VehicleCRM.IoC
 
         private static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<ISaleOpportunityRepository, SaleOpportunityRepository>();

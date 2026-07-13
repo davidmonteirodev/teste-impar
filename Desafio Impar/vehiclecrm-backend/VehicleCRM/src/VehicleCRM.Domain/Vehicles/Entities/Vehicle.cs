@@ -1,5 +1,6 @@
 ﻿using VehicleCRM.Domain.Common.Entities;
 using VehicleCRM.Domain.Vehicles.Enums;
+using VehicleCRM.Domain.Vehicles.Exceptions;
 
 namespace VehicleCRM.Domain.Vehicles.Entities
 {
@@ -7,7 +8,7 @@ namespace VehicleCRM.Domain.Vehicles.Entities
     {
         protected Vehicle() { }
 
-        public Vehicle(string brand, string model, int year, decimal price, string color, int mileage, VehicleSaleStatus status)
+        public Vehicle(string brand, string model, int year, decimal price, string color, int mileage)
         {
             Brand = brand;
             Model = model;
@@ -15,7 +16,7 @@ namespace VehicleCRM.Domain.Vehicles.Entities
             Price = price;
             Color = color;
             Mileage = mileage;
-            Status = status;
+            Status = VehicleSaleStatus.Available;
         }
 
         public virtual string Brand { get; private set; }
@@ -26,14 +27,24 @@ namespace VehicleCRM.Domain.Vehicles.Entities
         public virtual int Mileage { get; private set; }
         public virtual VehicleSaleStatus Status { get; private set; }
 
-        public virtual void Update(string brand, string model, int year, decimal price, string color, int mileage, VehicleSaleStatus status)
+        public virtual void Update(string brand, string model, int year, decimal price, string color, int mileage)
         {
+            if (Status == VehicleSaleStatus.Sold || Status == VehicleSaleStatus.Reserved)
+            {
+                var statusName = Status == VehicleSaleStatus.Sold ? "vendido" : "reservado";
+                throw new VehicleCannotBeEditedException(statusName);
+            }
+
             Brand = brand;
             Model = model;
             Year = year;
             Price = price;
             Color = color;
             Mileage = mileage;
+        }
+
+        public virtual void UpdateStatus(VehicleSaleStatus status)
+        {
             Status = status;
         }
     }

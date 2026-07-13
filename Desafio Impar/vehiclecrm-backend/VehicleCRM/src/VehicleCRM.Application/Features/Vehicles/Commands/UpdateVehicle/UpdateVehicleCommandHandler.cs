@@ -28,8 +28,7 @@ namespace VehicleCRM.Application.Features.Vehicles.Commands
                 request.Year,
                 request.Price,
                 request.Color,
-                request.Mileage,
-                request.Status);
+                request.Mileage);
 
             await _vehicleRepository.UpdateAsync(vehicle, cancellationToken);
         }

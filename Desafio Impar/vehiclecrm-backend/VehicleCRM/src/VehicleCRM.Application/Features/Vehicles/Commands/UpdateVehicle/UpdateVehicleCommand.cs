@@ -1,5 +1,4 @@
 using MediatR;
-using VehicleCRM.Domain.Vehicles.Enums;
 
 namespace VehicleCRM.Application.Features.Vehicles.Commands
 {
@@ -10,6 +9,5 @@ namespace VehicleCRM.Application.Features.Vehicles.Commands
         int Year,
         decimal Price,
         string? Color,
-        int Mileage,
-        VehicleSaleStatus Status) : IRequest;
+        int Mileage) : IRequest;
 }
