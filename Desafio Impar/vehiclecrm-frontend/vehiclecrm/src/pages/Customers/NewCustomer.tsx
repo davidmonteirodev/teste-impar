@@ -95,11 +95,13 @@ export default function NewCustomer() {
         confirmButtonText: 'OK',
       })
       navigate('/customers')
-    } catch {
+    } catch (error: unknown) {
+      const detail =
+        (error as { response?: { data?: { detail?: string } } })?.response?.data?.detail
       Swal.fire({
         icon: 'error',
         title: 'Erro',
-        text: 'Erro ao cadastrar cliente. Tente novamente.',
+        text: detail ?? 'Erro ao cadastrar cliente. Tente novamente.',
         confirmButtonText: 'OK',
       })
     } finally {

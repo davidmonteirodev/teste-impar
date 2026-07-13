@@ -39,6 +39,7 @@ export default function NewSaleOpportunity() {
   const [searchingCustomers, setSearchingCustomers] = useState(false)
   const customerDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const customerAutocompleteRef = useRef<HTMLDivElement>(null)
+  const customerJustSelectedRef = useRef(false)
 
   // Vehicle autocomplete
   const [vehicleInput, setVehicleInput] = useState('')
@@ -47,6 +48,7 @@ export default function NewSaleOpportunity() {
   const [searchingVehicles, setSearchingVehicles] = useState(false)
   const vehicleDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const vehicleAutocompleteRef = useRef<HTMLDivElement>(null)
+  const vehicleJustSelectedRef = useRef(false)
 
   // Close suggestions when clicking outside
   useEffect(() => {
@@ -64,6 +66,10 @@ export default function NewSaleOpportunity() {
 
   // Debounced customer search
   useEffect(() => {
+    if (customerJustSelectedRef.current) {
+      customerJustSelectedRef.current = false
+      return
+    }
     if (customerInput.length < 2) {
       setCustomerSuggestions([])
       setShowCustomerSuggestions(false)
@@ -88,6 +94,10 @@ export default function NewSaleOpportunity() {
 
   // Debounced vehicle search
   useEffect(() => {
+    if (vehicleJustSelectedRef.current) {
+      vehicleJustSelectedRef.current = false
+      return
+    }
     if (vehicleInput.length < 2) {
       setVehicleSuggestions([])
       setShowVehicleSuggestions(false)
@@ -116,6 +126,7 @@ export default function NewSaleOpportunity() {
   }
 
   function handleSelectCustomer(customer: Customer) {
+    customerJustSelectedRef.current = true
     setCustomerInput(customer.name)
     setForm(prev => ({ ...prev, customerId: customer.id }))
     setShowCustomerSuggestions(false)
@@ -128,6 +139,7 @@ export default function NewSaleOpportunity() {
   }
 
   function handleSelectVehicle(vehicle: Vehicle) {
+    vehicleJustSelectedRef.current = true
     setVehicleInput(`${vehicle.model} (${vehicle.year})`)
     setForm(prev => ({ ...prev, vehicleId: vehicle.id }))
     setShowVehicleSuggestions(false)
