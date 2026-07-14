@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y6jiUIuT9z0=",
+  "dgSpecHash": "ysZQT3jyNik=",
   "success": true,
-  "projectFilePath": "C:\\Git David\\teste-impar2\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.IoC\\VehicleCRM.IoC.csproj",
+  "projectFilePath": "C:\\Git David\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.IoC\\VehicleCRM.IoC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\David\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\David\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

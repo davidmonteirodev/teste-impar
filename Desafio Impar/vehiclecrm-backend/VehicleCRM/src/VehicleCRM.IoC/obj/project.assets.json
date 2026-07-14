@@ -1875,11 +1875,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Git David\\teste-impar2\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.IoC\\VehicleCRM.IoC.csproj",
+      "projectUniqueName": "C:\\Git David\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.IoC\\VehicleCRM.IoC.csproj",
       "projectName": "VehicleCRM.IoC",
-      "projectPath": "C:\\Git David\\teste-impar2\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.IoC\\VehicleCRM.IoC.csproj",
+      "projectPath": "C:\\Git David\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.IoC\\VehicleCRM.IoC.csproj",
       "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
-      "outputPath": "C:\\Git David\\teste-impar2\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.IoC\\obj\\",
+      "outputPath": "C:\\Git David\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.IoC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1902,14 +1902,14 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Git David\\teste-impar2\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Application\\VehicleCRM.Application.csproj": {
-              "projectPath": "C:\\Git David\\teste-impar2\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Application\\VehicleCRM.Application.csproj"
+            "C:\\Git David\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Application\\VehicleCRM.Application.csproj": {
+              "projectPath": "C:\\Git David\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Application\\VehicleCRM.Application.csproj"
             },
-            "C:\\Git David\\teste-impar2\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Domain\\VehicleCRM.Domain.csproj": {
-              "projectPath": "C:\\Git David\\teste-impar2\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Domain\\VehicleCRM.Domain.csproj"
+            "C:\\Git David\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Domain\\VehicleCRM.Domain.csproj": {
+              "projectPath": "C:\\Git David\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Domain\\VehicleCRM.Domain.csproj"
             },
-            "C:\\Git David\\teste-impar2\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Infrastructure\\VehicleCRM.Infrastructure.csproj": {
-              "projectPath": "C:\\Git David\\teste-impar2\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Infrastructure\\VehicleCRM.Infrastructure.csproj"
+            "C:\\Git David\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Infrastructure\\VehicleCRM.Infrastructure.csproj": {
+              "projectPath": "C:\\Git David\\teste-impar\\Desafio Impar\\vehiclecrm-backend\\VehicleCRM\\src\\VehicleCRM.Infrastructure\\VehicleCRM.Infrastructure.csproj"
             }
           }
         }

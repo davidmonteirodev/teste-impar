@@ -29,6 +29,9 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+# Install curl for health check
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 # Copy published files from publish stage
 COPY --from=publish /app/publish .
 
