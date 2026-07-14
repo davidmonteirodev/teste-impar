@@ -84,6 +84,7 @@ Durante o desenvolvimento deste projeto, foram adotadas as seguintes premissas:
 - **Marca e Cor**: Implementadas como campos de texto livre, sem validação de cadastros pré-definidos
 - **Sem cadastro de marcas**: Não foi criado um módulo específico para gerenciar marcas de veículos
 - **Sem cadastro de modelos**: Não foi criado um módulo específico para gerenciar modelos de veículos
+- **Regra de negócio**: Foram adotadas regras de negócio que não estavam no documento, mas de modo a garantir a integridade e consistência dos dados (Ex: Não permitir editar veículo vendido, status de veículo é alterado pela oportunidade de venda...)
 - **Foco no escopo**: O desenvolvimento priorizou atender aos requisitos solicitados de forma funcional e eficiente
 
 ## 🔮 Melhorias Futuras
