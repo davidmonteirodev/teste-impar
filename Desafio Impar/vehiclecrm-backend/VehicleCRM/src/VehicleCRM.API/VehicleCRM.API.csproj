@@ -8,7 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VehicleCRM.Application\VehicleCRM.Application.csproj" />
+    <ProjectReference Include="..\VehicleCRM.Infrastructure\VehicleCRM.Infrastructure.csproj" />
+    <ProjectReference Include="..\VehicleCRM.IoC\VehicleCRM.IoC.csproj" />
   </ItemGroup>
 
 </Project>

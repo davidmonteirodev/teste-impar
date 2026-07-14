@@ -6,4 +6,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VehicleCRM.Domain\VehicleCRM.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Extensions\" />
+    <Folder Include="Features\SaleOpportunities\Helpers\" />
+  </ItemGroup>
+
 </Project>
