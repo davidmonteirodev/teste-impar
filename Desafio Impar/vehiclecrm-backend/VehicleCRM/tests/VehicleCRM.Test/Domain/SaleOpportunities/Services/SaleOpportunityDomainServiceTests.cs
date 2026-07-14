@@ -28,6 +28,10 @@ public class SaleOpportunityDomainServiceTests
         var vehicle = Vehicle.Create("Toyota", "Corolla", 2023, 85000m, "Branco", 15000);
 
         _repositoryMock
+            .HasActiveOpportunityForVehicleAsync(Arg.Any<long>(), Arg.Any<long?>(), Arg.Any<CancellationToken>())
+            .Returns(false);
+
+        _repositoryMock
             .ExistsByCustomerAndVehicleAsync(Arg.Any<long>(), Arg.Any<long>(), Arg.Any<CancellationToken>())
             .Returns(false);
 
@@ -77,6 +81,10 @@ public class SaleOpportunityDomainServiceTests
         var vehicle = Vehicle.Create("Toyota", "Corolla", 2023, 85000m, "Branco", 15000);
 
         _repositoryMock
+            .HasActiveOpportunityForVehicleAsync(Arg.Any<long>(), Arg.Any<long?>(), Arg.Any<CancellationToken>())
+            .Returns(false);
+
+        _repositoryMock
             .ExistsByCustomerAndVehicleAsync(Arg.Any<long>(), Arg.Any<long>(), Arg.Any<CancellationToken>())
             .Returns(true);
 
@@ -96,6 +104,10 @@ public class SaleOpportunityDomainServiceTests
         var vehicle = Vehicle.Create("Toyota", "Corolla", 2023, 85000m, "Branco", 15000);
 
         _repositoryMock
+            .HasActiveOpportunityForVehicleAsync(Arg.Any<long>(), Arg.Any<long?>(), Arg.Any<CancellationToken>())
+            .Returns(false);
+
+        _repositoryMock
             .ExistsByCustomerAndVehicleAsync(Arg.Any<long>(), Arg.Any<long>(), Arg.Any<CancellationToken>())
             .Returns(false);
 
@@ -103,6 +115,7 @@ public class SaleOpportunityDomainServiceTests
         await _service.ValidateNewSaleOpportunityAsync(customer, vehicle);
 
         // Assert
+        await _repositoryMock.Received(1).HasActiveOpportunityForVehicleAsync(vehicle.Id, null, Arg.Any<CancellationToken>());
         await _repositoryMock.Received(1).ExistsByCustomerAndVehicleAsync(customer.Id, vehicle.Id, Arg.Any<CancellationToken>());
     }
 
@@ -115,6 +128,10 @@ public class SaleOpportunityDomainServiceTests
         var cancellationToken = new CancellationToken();
 
         _repositoryMock
+            .HasActiveOpportunityForVehicleAsync(Arg.Any<long>(), Arg.Any<long?>(), cancellationToken)
+            .Returns(false);
+
+        _repositoryMock
             .ExistsByCustomerAndVehicleAsync(Arg.Any<long>(), Arg.Any<long>(), cancellationToken)
             .Returns(false);
 
@@ -122,6 +139,7 @@ public class SaleOpportunityDomainServiceTests
         await _service.ValidateNewSaleOpportunityAsync(customer, vehicle, cancellationToken);
 
         // Assert
+        await _repositoryMock.Received(1).HasActiveOpportunityForVehicleAsync(vehicle.Id, null, cancellationToken);
         await _repositoryMock.Received(1).ExistsByCustomerAndVehicleAsync(customer.Id, vehicle.Id, cancellationToken);
     }
 
@@ -138,6 +156,49 @@ public class SaleOpportunityDomainServiceTests
 
         // Assert
         await act.Should().ThrowAsync<VehicleNotAvailableException>();
+        await _repositoryMock.DidNotReceive().HasActiveOpportunityForVehicleAsync(Arg.Any<long>(), Arg.Any<long?>(), Arg.Any<CancellationToken>());
         await _repositoryMock.DidNotReceive().ExistsByCustomerAndVehicleAsync(Arg.Any<long>(), Arg.Any<long>(), Arg.Any<CancellationToken>());
+    }
+
+    [Fact]
+    public async Task ValidateNewSaleOpportunityAsync_WhenVehicleHasActiveOpportunity_ShouldThrowVehicleInActiveOpportunityException()
+    {
+        // Arrange
+        var customer = Customer.Create("João Silva", "joao@example.com", "11987654321", CustomerMainInterest.Sedan);
+        var vehicle = Vehicle.Create("Toyota", "Corolla", 2023, 85000m, "Branco", 15000);
+
+        _repositoryMock
+            .HasActiveOpportunityForVehicleAsync(Arg.Any<long>(), Arg.Any<long?>(), Arg.Any<CancellationToken>())
+            .Returns(true);
+
+        // Act
+        Func<Task> act = async () => await _service.ValidateNewSaleOpportunityAsync(customer, vehicle);
+
+        // Assert
+        await act.Should().ThrowAsync<VehicleInActiveOpportunityException>()
+            .WithMessage("*Corolla*");
+        await _repositoryMock.DidNotReceive().ExistsByCustomerAndVehicleAsync(Arg.Any<long>(), Arg.Any<long>(), Arg.Any<CancellationToken>());
+    }
+
+    [Fact]
+    public async Task ValidateNewSaleOpportunityAsync_WhenVehicleHasOnlyLostOpportunities_ShouldNotThrowException()
+    {
+        // Arrange
+        var customer = Customer.Create("João Silva", "joao@example.com", "11987654321", CustomerMainInterest.Sedan);
+        var vehicle = Vehicle.Create("Toyota", "Corolla", 2023, 85000m, "Branco", 15000);
+
+        _repositoryMock
+            .HasActiveOpportunityForVehicleAsync(Arg.Any<long>(), Arg.Any<long?>(), Arg.Any<CancellationToken>())
+            .Returns(false);
+
+        _repositoryMock
+            .ExistsByCustomerAndVehicleAsync(Arg.Any<long>(), Arg.Any<long>(), Arg.Any<CancellationToken>())
+            .Returns(false);
+
+        // Act
+        Func<Task> act = async () => await _service.ValidateNewSaleOpportunityAsync(customer, vehicle);
+
+        // Assert
+        await act.Should().NotThrowAsync();
     }
 }

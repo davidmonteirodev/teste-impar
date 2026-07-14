@@ -26,6 +26,16 @@ namespace VehicleCRM.Domain.SaleOpportunities.Services
                 throw new VehicleNotAvailableException(vehicle.Model);
             }
 
+            var hasActiveOpportunity = await _saleOpportunityRepository.HasActiveOpportunityForVehicleAsync(
+                vehicle.Id,
+                null,
+                cancellationToken);
+
+            if (hasActiveOpportunity)
+            {
+                throw new VehicleInActiveOpportunityException(vehicle.Model);
+            }
+
             var exists = await _saleOpportunityRepository.ExistsByCustomerAndVehicleAsync(
                 customer.Id,
                 vehicle.Id,
