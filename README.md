@@ -23,12 +23,17 @@ Para executar este projeto em sua máquina, você precisará ter instalado:
 ### 1. Configuração do Ambiente
 
 Antes de iniciar a aplicação, é necessário configurar as variáveis de ambiente:
+Na pasta que tem o arquivo `docker-compose.yml`, execute o comando abaixo para criar o arquivo `.env` a partir do modelo fornecido:
 
 ```bash
 # Copie o arquivo de exemplo
 cp .env.example .env
 ```
-
+ou 
+```bash
+# Copie o arquivo de exemplo
+copy .env.example .env
+```
 ### 2. Edite o arquivo `.env`
 
 Abra o arquivo `.env` e altere o campo `DB_PASSWORD` com uma senha forte para o banco de dados:
