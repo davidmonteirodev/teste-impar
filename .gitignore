@@ -3,6 +3,7 @@
 ################################################################################
 
 /.vs
+/Desafio Impar/.env
 /Desafio Impar/vehiclecrm-backend/VehicleCRM/.vs
 /Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.API/bin/Debug/net10.0
 /Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.API/obj
@@ -14,3 +15,5 @@
 /Desafio Impar/vehiclecrm-backend/VehicleCRM/src/VehicleCRM.Infrastructure/obj
 /Desafio Impar/vehiclecrm-backend/VehicleCRM/tests/VehicleCRM.Test/bin/Debug/net10.0
 /Desafio Impar/vehiclecrm-backend/VehicleCRM/tests/VehicleCRM.Test/obj
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/tests/VehicleCRM.IoC/bin/Debug/net10.0
+/Desafio Impar/vehiclecrm-backend/VehicleCRM/tests/VehicleCRM.IoC/obj
