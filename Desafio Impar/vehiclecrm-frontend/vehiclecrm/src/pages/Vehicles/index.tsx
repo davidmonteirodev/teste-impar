@@ -206,6 +206,7 @@ export default function Vehicles() {
       {/* Filter panel */}
       <div className="card mb-4">
         <div className="card-body">
+          <form onSubmit={e => { e.preventDefault(); handleSearch(); }}>
           <div className="row g-3">
             <div className="col-12 col-sm-6 col-md-4 col-lg-3">
               <label className="form-label small fw-semibold">Marca</label>
@@ -310,16 +311,17 @@ export default function Vehicles() {
               />
             </div>
             <div className="col-12 d-flex gap-2 justify-content-end">
-              <button className="btn btn-outline-secondary btn-sm" onClick={handleClear}>
+              <button type="button" className="btn btn-outline-secondary btn-sm" onClick={handleClear}>
                 <i className="bi bi-x-circle me-1" />
                 Limpar
               </button>
-              <button className="btn btn-primary btn-sm" onClick={handleSearch}>
+              <button type="submit" className="btn btn-primary btn-sm">
                 <i className="bi bi-search me-1" />
                 Buscar
               </button>
             </div>
           </div>
+          </form>
         </div>
       </div>
 

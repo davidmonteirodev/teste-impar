@@ -15,7 +15,6 @@ export const customerService = {
     }
     if (params.name) query.name = params.name
     if (params.email) query.email = params.email
-    if (params.phone) query.phone = params.phone
     if (params.mainInterest != null) query.maininterest = params.mainInterest
     return api.get<PaginatedResponse<Customer>>('customers', { params: query, signal })
   },
