@@ -22,7 +22,6 @@ namespace VehicleCRM.Application.Features.Customers.Queries
                 PageSize = request.PageSize,
                 Name = request.Name,
                 Email = request.Email,
-                Phone = request.Phone,
                 MainInterest = request.MainInterest
             };
 

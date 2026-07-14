@@ -3,7 +3,7 @@ using VehicleCRM.Domain.SaleOpportunities.Repositories;
 
 namespace VehicleCRM.Application.Features.SaleOpportunities.Queries
 {
-    public sealed class GetSaleOpportunityByIdQueryHandler : IRequestHandler<GetSaleOpportunityByIdQuery, SaleOpportunityResponse>
+    public sealed class GetSaleOpportunityByIdQueryHandler : IRequestHandler<GetSaleOpportunityByIdQuery, SaleOpportunityResponse?>
     {
         private readonly ISaleOpportunityRepository _saleOpportunityRepository;
 
@@ -12,11 +12,11 @@ namespace VehicleCRM.Application.Features.SaleOpportunities.Queries
             _saleOpportunityRepository = saleOpportunityRepository;
         }
 
-        public async Task<SaleOpportunityResponse> Handle(GetSaleOpportunityByIdQuery request, CancellationToken cancellationToken)
+        public async Task<SaleOpportunityResponse?> Handle(GetSaleOpportunityByIdQuery request, CancellationToken cancellationToken)
         {
             var saleOpportunity = await _saleOpportunityRepository.GetByIdWithRelationsAsync(request.Id, cancellationToken);
 
-            return saleOpportunity.ToResponse();
+            return saleOpportunity?.ToResponse();
         }
     }
 }

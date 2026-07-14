@@ -25,9 +25,6 @@ namespace VehicleCRM.Infrastructure.Persistence.Repositories
             if (!string.IsNullOrWhiteSpace(criteria.Email))
                 query = query.Where(c => EF.Functions.Like(c.Email, $"%{criteria.Email}%"));
 
-            if (!string.IsNullOrWhiteSpace(criteria.Phone))
-                query = query.Where(c => EF.Functions.Like(c.Phone, $"%{criteria.Phone}%"));
-
             if (criteria.MainInterest.HasValue)
                 query = query.Where(c => c.MainInterest == criteria.MainInterest.Value);
 

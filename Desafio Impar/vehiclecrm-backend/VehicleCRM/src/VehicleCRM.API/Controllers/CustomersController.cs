@@ -45,7 +45,7 @@ namespace VehicleCRM.API.Controllers
         public async Task<IActionResult> GetById(long id)
         {
             var result = await _mediator.Send(new GetCustomerByIdQuery(id));
-            return Ok(result);
+            return result is null ? NotFound() : Ok(result);
         }
 
         /// <summary>

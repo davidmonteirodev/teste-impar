@@ -8,7 +8,6 @@ namespace VehicleCRM.Domain.Customers.Repositories.Criteria
         public int PageSize { get; set; }
         public string? Name { get; set; }
         public string? Email { get; set; }
-        public string? Phone { get; set; }
         public CustomerMainInterest? MainInterest { get; set; }
     }
 }

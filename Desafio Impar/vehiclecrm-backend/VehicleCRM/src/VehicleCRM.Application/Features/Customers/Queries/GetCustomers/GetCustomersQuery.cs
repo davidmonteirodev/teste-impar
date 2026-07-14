@@ -8,7 +8,6 @@ namespace VehicleCRM.Application.Features.Customers.Queries
     {
         public string? Name { get; init; }
         public string? Email { get; init; }
-        public string? Phone { get; init; }
         public CustomerMainInterest? MainInterest { get; init; }
     }
 }

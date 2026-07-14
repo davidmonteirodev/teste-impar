@@ -31,6 +31,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 await app.Services.ApplyMigrationsAsync();
+await app.Services.SeedDatabaseAsync();
 
 if (app.Environment.IsDevelopment())
 {
