@@ -143,6 +143,18 @@ Se você receber um erro informando que a porta já está em uso, você pode:
 - Verifique os logs do backend: `docker-compose logs backend`
 - Reinicie o container do backend: `docker-compose restart backend`
 
+## 📚 Documentação Adicional
+
+Este projeto conta com documentação detalhada na pasta `docs/`:
+
+| Documento | Descrição |
+|-----------|-----------|
+| **[semantic-documentation.md](docs/semantic-documentation.md)** | Documentação semântica do sistema com entidades, regras de negócio e premissas |
+| **[qa-documentation.md](docs/qa-documentation.md)** | Estratégia de qualidade, guia de testes e validações manuais |
+| **[ai-test-executions.md](docs/ai-test-executions.md)** | Registro de validações realizadas com apoio de Inteligência Artificial (GitHub Copilot) |
+
+> 💡 **Nota para Desenvolvedores**: A documentação semântica é especialmente útil para entender as regras de negócio e decisões arquiteturais do projeto.
+
 ## 📄 Licença
 
 Este projeto foi desenvolvido como parte de um desafio técnico.
