@@ -1,1 +1,80 @@
 /* App-level styles */
+
+/* ── Sidebar – desktop ── */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  flex-shrink: 0;               /* impede Bootstrap de comprimir */
+  transition: width 0.25s ease, min-width 0.25s ease;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 64px;
+  min-width: 64px;
+}
+
+/* Ícone centralizado no estado colapsado (desktop) */
+.sidebar.collapsed .nav-link {
+  justify-content: center;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.sidebar .nav-label {
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 0.15s ease, max-width 0.25s ease;
+  max-width: 200px;
+  opacity: 1;
+}
+
+.sidebar.collapsed .nav-label {
+  opacity: 0;
+  max-width: 0;
+}
+
+/* ── Overlay (mobile only) ── */
+/* Começa em top:56px para não cobrir a navbar e o botão hamburguer */
+.sidebar-overlay {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1040;
+}
+
+/* ── Sidebar – mobile (drawer deslizante) ── */
+@media (max-width: 767.98px) {
+  .sidebar {
+    position: fixed;
+    top: 56px;                  /* alinhado abaixo da navbar */
+    left: 0;
+    bottom: 0;
+    z-index: 1045;
+    width: 260px !important;
+    min-width: 260px !important;
+    transform: translateX(0);
+    transition: transform 0.25s ease;
+    overflow-y: auto;
+  }
+
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+
+  /* No mobile os labels ficam sempre visíveis quando o drawer abre */
+  .sidebar .nav-label,
+  .sidebar.collapsed .nav-label {
+    opacity: 1;
+    max-width: 200px;
+  }
+
+  .sidebar.collapsed .nav-link {
+    justify-content: flex-start;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
