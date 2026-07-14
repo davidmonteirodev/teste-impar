@@ -210,9 +210,8 @@ Ponto de entrada da aplicação:
 
 ### VehicleCRM.Test
 
-Testes automatizados:
+Testes das camadas Application e Domain:
 - Testes de unidade
-- Testes de integração
 
 ---
 
